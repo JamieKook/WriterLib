@@ -26,6 +26,16 @@ module.exports = function(app) {
       });
   });
 
+  app.post("/api/authors", function(req, res) {
+    db.Author.create(req.body)
+      .then(function() {
+       res.status(200); 
+      })
+      .catch(function(err) {
+        console.log(err); 
+      });
+  });
+
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
