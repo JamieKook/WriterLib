@@ -1,4 +1,3 @@
-
 module.exports = function(sequelize, DataTypes) {
   const Author = sequelize.define("Author", {
     // The email cannot be null, and must be a proper email before creation
@@ -23,6 +22,16 @@ module.exports = function(sequelize, DataTypes) {
     }
 
   });
-  
+  Author.associate = function(models) {
+    Author.hasMany(models.Book, {
+      onDelete: "cascade"
+    });
+
+    Author.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return Author;
 };
