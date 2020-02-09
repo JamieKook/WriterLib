@@ -16,6 +16,8 @@ $(document).ready(function() {
       password: passwordInput.val().trim()
     };
 
+    let pseudonym; 
+    let usePseudonym; 
     if(isPseudonym.is(":checked")){
       usePseudonym = true; 
       pseudonym = pseudonymEl.val().trim()

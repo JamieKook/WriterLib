@@ -10,6 +10,19 @@ module.exports = function(app) {
             }); 
     }); 
 
+    app.get("/api/authors/:id", function(req,res){
+        console.log(req.params.id); 
+        db.Author.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(author){
+            res.json(author); 
+        }).catch(function(err){
+            res.status(404).json(err); 
+        });
+    }); 
+
     app.post("/api/authors", function(req, res) {
         db.Author.create(req.body)
         .then(function(results) {
@@ -21,6 +34,28 @@ module.exports = function(app) {
         });
     });
 
-   
+    app.delete("/api/authors/:id", function(){
+        db.Author.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(author){
+            res.json(author); 
+        }).catch(function(err){
+            res.status(404); 
+        }); 
+    }); 
 
-}
+   app.put("/api/author/:id", function(){
+       db.Author.update(req.body,
+        {
+            where: {
+                id: req.params.id
+            }
+       }).then(function(author){
+           res.json(author); 
+       }).catch(function(err){
+           res.status(404); 
+       }); 
+   }); 
+}; 
