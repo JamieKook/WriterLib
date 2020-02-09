@@ -7,7 +7,6 @@ module.exports = function(app) {
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    console.log(req.user); 
     res.json(req.user);
   });
 
@@ -19,21 +18,11 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password
     })
-      .then(function() {
-        res.redirect(307, "/api/login");
+      .then(function(results) {
+        res.status(200).json(results); 
       })
       .catch(function(err) {
         res.status(401).json(err);
-      });
-  });
-
-  app.post("/api/authors", function(req, res) {
-    db.Author.create(req.body)
-      .then(function() {
-       res.status(200); 
-      })
-      .catch(function(err) {
-        console.log(err); 
       });
   });
 

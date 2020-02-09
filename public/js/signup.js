@@ -35,8 +35,7 @@ $(document).ready(function() {
       return;
     }
     
-    signUpUser(userData.email, userData.password);
-    addAuthorData(authorData); 
+    signUpUser(userData.email, userData.password, authorData);
     emailInput.val("");
     passwordInput.val("");
     firstName.val(""); 
@@ -46,13 +45,14 @@ $(document).ready(function() {
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(email, password) {
+  function signUpUser(email, password, authorData) {
     $.post("/api/signup", {
       email: email,
       password: password
     })
       .then(function(data) {
-        window.location.replace("/home");
+        authorData.UserId = data.id; 
+        addAuthorData(authorData); 
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
@@ -61,7 +61,7 @@ $(document).ready(function() {
   function addAuthorData(authorData){
     $.post("/api/authors", authorData)
       .then(function(data){
-
+        window.location.replace("/home");
       })
       .catch(handleLoginErr);
   }
