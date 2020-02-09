@@ -34,7 +34,7 @@ module.exports = function(app) {
         });
     });
 
-    app.delete("/api/authors/:id", function(){
+    app.delete("/api/authors/:id", isAuthenticated, function(){
         db.Author.destroy({
             where: {
                 id: req.params.id
@@ -46,7 +46,7 @@ module.exports = function(app) {
         }); 
     }); 
 
-   app.put("/api/author/:id", function(){
+   app.put("/api/author/:id", isAuthenticated, function(){
        db.Author.update(req.body,
         {
             where: {
