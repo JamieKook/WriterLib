@@ -69,7 +69,7 @@ $(document).ready(function() {
   }
 
   function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
+    $("#alert .msg").text("An account already exsists at this email");
     $("#alert").fadeIn(500);
   }
 });
