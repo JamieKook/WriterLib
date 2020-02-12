@@ -5,16 +5,7 @@ $(document).ready(function() {
       event.preventDefault();
 
       var form = $('#fileUploadForm')[0];
-
       var data = new FormData(form);
-    
-      //   const fileInput = document.getElementById("exampleFormControlFile1"); 
-      //   const file = fileInput.files[0];
-      //   console.log(file);  
-      //   const formData = new FormData(); 
-      //   formData.append("file", file); 
-      //  console.log(formData);
-      console.log(data); 
       // AJAX request
       $.ajax({
         type: "POST",

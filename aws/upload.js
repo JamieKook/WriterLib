@@ -5,13 +5,21 @@ const ID = process.env.ID;
 const SECRET = process.env.SECRET;
 const BUCKET_NAME = process.env.BUCKET_NAME;
 
-const uploadFile = (fileName) => {
+
+
+module.exports = (fileName) => {
+
+    const s3 = new AWS.S3({
+        accessKeyId: ID,
+        secretAccessKey: SECRET,
+        bucket: BUCKET_NAME,
+    });
     // Read content from the file
     const fileContent = fs.readFileSync(fileName);
     //Setting up S3 upload parameters
     const params = {
         Bucket: BUCKET_NAME,
-        Key: 'file', // file name we want to save as in S3
+        Key: 'book1.pdf', // file name we want to save as in S3
         Body: fileContent
     };
 
@@ -20,6 +28,6 @@ const uploadFile = (fileName) => {
         if (err) {
             throw err;
         }
-        console.log('File uploaded successfully. ${data.Location}');
+        console.log(`File uploaded successfully. ${data.Location}`);
     });
 };
