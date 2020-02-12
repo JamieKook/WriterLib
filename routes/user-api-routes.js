@@ -18,21 +18,11 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password
     })
-      .then(function() {
-        res.redirect(307, "/api/login");
+      .then(function(results) {
+        res.status(200).json(results); 
       })
       .catch(function(err) {
-        res.status(401).json(err);
-      });
-  });
-
-  app.post("/api/authors", function(req, res) {
-    db.Author.create(req.body)
-      .then(function() {
-       res.status(200); 
-      })
-      .catch(function(err) {
-        console.log(err); 
+        res.status(409).json(err);
       });
   });
 
