@@ -33,7 +33,7 @@ function listObjects(){
     });
     var params = {
         Bucket: BUCKET_NAME, 
-        MaxKeys: 2
+        MaxKeys: 5
        };
        s3.listObjects(params, function(err, data) {
          if (err) console.log(err, err.stack); // an error occurred

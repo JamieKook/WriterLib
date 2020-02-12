@@ -20,7 +20,8 @@ class AwsHandling{
         const params = {
             Bucket: BUCKET_NAME,
             Key: `book${bookId}.pdf`, // file name we want to save as in S3
-            Body: fileContent
+            Body: fileContent,
+            ContentType: "application/pdf"
         };
 
         //Uploading files to the bucket
@@ -44,7 +45,7 @@ class AwsHandling{
             }); 
         }   
 
-    retrieveFile(fileName, res){
+    retrieveFile(fileName, bookId){
 
         var params = {
             Bucket: BUCKET_NAME, 
@@ -56,7 +57,8 @@ class AwsHandling{
                 console.log(err, err.stack); // an error occurred
             } else {
                 console.log(data); 
-                return data;  
+                fs.writeFileSync(`./downloads/book${bookId}.pdf`, data.Body.toString()); 
+                console.log(`./downloads/book${bookId}.pdf has been created!`);
             }     
             
         }); 

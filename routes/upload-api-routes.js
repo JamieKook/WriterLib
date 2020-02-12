@@ -8,15 +8,23 @@ const awsHandling = new AwsHandling();
 module.exports = function(app) {
 
 
-    app.get("/upload-bookfile", async function(req, res){
+    app.get("/download-bookfile/:id", async function(req, res){
         try {
-            let bookId= 1; 
-            let bookFile = await awsHandling.retrieveFile(`book${bookId}.pdf`); 
-            bookFile.mv(`./tmp/book${bookId}.pdf`); 
+            let bookId= req.params.id; 
+            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
+    
         } catch(err) {
             console.log(err); 
         }
+    }); 
 
+    app.get("/upload-bookfile", async function(req, res){
+        try {
+            await awsHandling.listObjects(); 
+    
+        } catch(err) {
+            console.log(err); 
+        }
     }); 
 
 
@@ -30,9 +38,10 @@ module.exports = function(app) {
                 }); 
             } else {
                 let bookFile = req.files.bookFile; 
-                bookFile.mv("./uploads/"+ bookFile.name);
-               let file = "/Users/jamiekook/Repos/WriterLib/uploads/The Aged Mother.pdf"
-               upload(file); 
+                await bookFile.mv("./uploads/"+ bookFile.name);
+               let file = path.join(`./uploads/${bookFile.name}`); 
+               console.log(file); 
+               await awsHandling.upload(file, 13);
                 res.send({
                     status: true,
                     message: "File is uploaded",
