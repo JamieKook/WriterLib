@@ -1,6 +1,14 @@
 // Requiring necessary npm packages
 require('dotenv').config();
 const express = require("express");
+
+const fileUpload= require("express-fileupload"); 
+const cors = require("cors"); 
+const bodyParser = require("body-parser");
+const morgan = require("morgan");  
+const _ = require("lodash"); 
+
+//file upload stuff
 const exphbs = require("express-handlebars"); 
 const session = require("express-session");
 const passport = require("./config/passport");
@@ -18,6 +26,15 @@ app.use(express.static("public"));
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+//More on file upload
+app.use(fileUpload({
+  createParentPath: true
+})); 
+app.use(cors()); 
+// app.use(bodyParser.json()); 
+// app.use(bodyParser.urlencoded({extended: true})); 
+app.use(morgan("dev")); 
 
 app.engine("handlebars", exphbs({defaultLayout: "main"})); 
 app.set("view engine", "handlebars"); 
