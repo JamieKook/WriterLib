@@ -4,6 +4,7 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
 
     app.post("/upload-bookfile", async function (req, res) {
+        console.log(req.body); 
         try {
             if(!req.files) {
                 res.send({
