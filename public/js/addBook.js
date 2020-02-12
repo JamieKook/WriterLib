@@ -10,7 +10,7 @@ $(document).ready(function() {
       $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "/upload-bookfile",
+        url: "/api/books",
         data: data,
         processData: false,
         contentType: false,
