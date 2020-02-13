@@ -1,7 +1,7 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-const PdfReader = require("pdfreader"); 
-
+const PdfHandling = require("../pdfsplit"); 
+const pdfHandling = new PdfHandling(); 
 const ID = process.env.JID;
 const SECRET = process.env.JSECRET;
 const BUCKET_NAME = process.env.JBUCKET;
@@ -56,8 +56,9 @@ class AwsHandling{
                 console.log(err, err.stack); // an error occurred
             } else {
                 console.log(data); 
-                fs.writeFileSync(`./downloads/book${bookId}.pdf`, data.Body.toString()); 
-                console.log(`./downloads/book${bookId}.pdf has been created!`);
+                pdfHandling.createTempBookFolder(bookId); 
+                fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
+                console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`);
             }     
             
         }); 

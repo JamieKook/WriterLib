@@ -28,6 +28,18 @@ module.exports = function(app) {
         });
     }); 
 
+    app.get("/api/books/fileDownload/:id", async function(req, res){
+        try {
+            let bookId= req.params.id; 
+            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
+            const imgPaths = await pdfHandling.createImages(bookId); 
+           console.log(imgPaths); 
+           //render book handlebars here with imgPaths object
+        } catch(err) {
+            console.log(err); 
+        }
+    }); 
+
     app.post("/api/books/fileUpload", async function(req, res) {
         try {
             const results = await db.Book.create({
@@ -59,7 +71,7 @@ module.exports = function(app) {
                         size: bookFile.size
                     }
                 }); 
-                // pdfHandling.deleteTempBookFolder(bookId); 
+                pdfHandling.deleteTempBookFolder(bookId); 
             }
             // res.status(200); 
             // res.json(results); 

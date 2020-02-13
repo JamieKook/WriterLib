@@ -16,7 +16,6 @@
     "bcryptjs": "2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "data-uri-to-buffer": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.0",
     "express-fileupload": "^1.1.6",
@@ -27,7 +26,6 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pdf-image": "^2.0.0",
-    "pdfreader": "^1.0.6",
     "sequelize": "^5.8.6"
   }
 }
