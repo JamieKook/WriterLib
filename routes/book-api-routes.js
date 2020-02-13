@@ -30,11 +30,15 @@ module.exports = function(app) {
 
     app.get("/api/books/fileDownload/:id", async function(req, res){
         try {
-            let bookId= req.params.id; 
+            const bookId= req.params.id; 
+          
             await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
             const imgPaths = await pdfHandling.createImages(bookId); 
-           console.log(imgPaths); 
-           //render book handlebars here with imgPaths object
+            console.log(imgPaths); 
+            const imgPathsArr = Object.values(imgPaths); 
+             console.log(imgPathsArr);  
+           //render book handlebars here with imgPaths array
+           pdfHandling.deleteTempBookFolder(bookId); 
         } catch(err) {
             console.log(err); 
         }
@@ -61,7 +65,9 @@ module.exports = function(app) {
                 await awsHandling.upload(bookFile, bookId);
                 const imgPaths = await pdfHandling.createImages(bookId);
                 console.log(imgPaths); 
-                //add render function here to use image path object as code
+                const imgPathsArr = Object.values(imgPaths); 
+                console.log(imgPathsArr); 
+                //add render function here to use image path array as code
                 res.send({
                     status: true,
                     message: "File is uploaded",

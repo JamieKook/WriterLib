@@ -2,9 +2,6 @@ const path =  require ("path");
 const fs = require ("fs"); 
 const PDFImage = require("pdf-image").PDFImage; 
 
-
-const outputFolder = path.join(__dirname, "/output"); 
-
 class PdfHandling { 
 
     createTempBookFolder(bookId){
@@ -41,6 +38,7 @@ class PdfHandling {
             fs.unlinkSync(path.join(tempFolder, file));
         });
         fs.rmdirSync(tempFolder); 
+        console.log("deleted folder "+ bookId); 
     }
 
     deleteUploadsBookFolder(bookId){

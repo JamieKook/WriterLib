@@ -14,7 +14,7 @@ const s3 = new AWS.S3({
 
 class AwsHandling{
 
-    upload(fileName, bookId){
+    async upload(fileName, bookId){
         // Setting up S3 upload parameters
         const params = {
             Bucket: BUCKET_NAME,
@@ -44,7 +44,7 @@ class AwsHandling{
             }); 
         }   
 
-    retrieveFile(fileName, bookId){
+    async retrieveFile(fileName, bookId){
 
         var params = {
             Bucket: BUCKET_NAME, 
@@ -58,10 +58,18 @@ class AwsHandling{
                 console.log(data); 
                 pdfHandling.createTempBookFolder(bookId); 
                 fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
-                console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`);
+                console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`); 
             }     
-            
-        }); 
+        });
+
+        let promise = new Promise((res, rej) => {
+            setTimeout(() => res("Now it's done!"), 1000)
+        });
+    
+        // wait until the promise returns us a value
+        let result = await promise; 
+        return result; 
+    
     }
 
 }
