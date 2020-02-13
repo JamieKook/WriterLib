@@ -33,4 +33,8 @@ module.exports = function(app) {
   app.get("/bookEditor", isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/bookEditor.html")); 
   }); 
+
+  app.get("/addBook", function(req, res){
+    res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
+  }); 
 };
