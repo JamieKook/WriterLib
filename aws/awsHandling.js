@@ -2,9 +2,9 @@ const fs = require('fs');
 const AWS = require('aws-sdk');
 const PdfHandling = require("../pdfsplit"); 
 const pdfHandling = new PdfHandling(); 
-const ID = process.env.JID;
-const SECRET = process.env.JSECRET;
-const BUCKET_NAME = process.env.JBUCKET;
+const ID = process.env.ID;
+const SECRET = process.env.SECRET;
+const BUCKET_NAME = process.env.BUCKET_NAME;
 
 const s3 = new AWS.S3({
     accessKeyId: ID,
