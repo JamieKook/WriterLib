@@ -1,12 +1,11 @@
 {
-  "name": "1-Passport-Example",
+  "name": "The Writer's Room",
   "version": "1.0.0",
-  "description": "",
+  "description": "A place to share your writing",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
