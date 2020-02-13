@@ -1,9 +1,10 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
+const PdfReader = require("pdfreader"); 
 
-const ID = process.env.ID;
-const SECRET = process.env.SECRET;
-const BUCKET_NAME = process.env.BUCKET_NAME;
+const ID = process.env.JID;
+const SECRET = process.env.JSECRET;
+const BUCKET_NAME = process.env.JBUCKET;
 
 const s3 = new AWS.S3({
     accessKeyId: ID,
@@ -14,13 +15,11 @@ const s3 = new AWS.S3({
 class AwsHandling{
 
     upload(fileName, bookId){
-        // Read content from the file
-        const fileContent = fs.readFileSync(fileName);
-        //Setting up S3 upload parameters
+        // Setting up S3 upload parameters
         const params = {
             Bucket: BUCKET_NAME,
             Key: `book${bookId}.pdf`, // file name we want to save as in S3
-            Body: fileContent,
+            Body: fileName.data,
             ContentType: "application/pdf"
         };
 

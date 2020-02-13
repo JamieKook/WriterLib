@@ -43,9 +43,10 @@ module.exports = function(app) {
  
                 }); 
             } else {
-                let bookFile = req.files.bookFile; 
+                let bookFile = req.files.bookFile;
+                console.log(bookFile);  
                 bookFile.mv(`./tmp/${bookId}/book${bookId}.pdf`);
-                await awsHandling.upload(file, bookId);
+                await awsHandling.upload(bookFile, bookId);
                 const imgPaths = await pdfHandling.createImages(bookId);
                 console.log(imgPaths); 
                 //add render function here to use image path object as code
@@ -58,7 +59,7 @@ module.exports = function(app) {
                         size: bookFile.size
                     }
                 }); 
-                pdfHandling.deleteTempBookFolder(bookId); 
+                // pdfHandling.deleteTempBookFolder(bookId); 
             }
             // res.status(200); 
             // res.json(results); 

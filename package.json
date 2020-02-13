@@ -27,6 +27,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pdf-image": "^2.0.0",
+    "pdfreader": "^1.0.6",
     "sequelize": "^5.8.6"
   }
 }
