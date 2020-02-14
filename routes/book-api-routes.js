@@ -38,7 +38,7 @@ module.exports = function(app) {
              console.log(imgPathsArr); 
              let bookImgObs=[]; 
              for (const image of imgPathsArr){
-                const path = image.replace("/Users/jamiekook/Repos/WriterLib/public/", "/");
+                const path = image.replace("public/", "/");
                 let imgObj= {image: path}; 
                 bookImgObs.push(imgObj); 
              } 
@@ -69,14 +69,14 @@ module.exports = function(app) {
                 let bookFile = req.files.bookFile;
                 console.log(bookFile);  
                 bookFile.mv(`./public/tmp/${bookId}/book${bookId}.pdf`);
-                await awsHandling.upload(bookFile, bookId);
+                // await awsHandling.upload(bookFile, bookId);
                 const imgPaths = await pdfHandling.createImages(bookId);
                 console.log(imgPaths); 
             const imgPathsArr = Object.values(imgPaths); 
              console.log(imgPathsArr); 
              let bookImgObs=[]; 
              for (const image of imgPathsArr){
-                const path = image.replace("/Users/jamiekook/Repos/WriterLib/public/", "/");
+                const path = image.replace("public/", "/");
                 let imgObj= {image: path}; 
                 bookImgObs.push(imgObj); 
              } 
