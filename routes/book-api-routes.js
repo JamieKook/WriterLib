@@ -33,7 +33,12 @@ module.exports = function(app) {
     app.get("/api/books/fileDownload/:id", async function(req, res){
         try {
             const bookId= req.params.id; 
-            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
+            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+            const filePath = `./public/tmp/${bookId}/book${bookId}.pdf`;  
+            // res.download(file);
+            // var file = fs.createReadStream(filePath);
+            // file.pipe(res);
+            
             const imgPaths = await pdfHandling.createImages(bookId); 
             console.log(imgPaths); 
             const imgPathsArr = Object.values(imgPaths); 
