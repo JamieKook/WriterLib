@@ -55,8 +55,8 @@ class AwsHandling{
             await getObjectPromise.then(function(data) {
             console.log(data); 
             pdfHandling.createTempBookFolder(bookId); 
-            fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
-            console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`);
+            fs.writeFileSync(`./public/tmp/${bookId}/book${bookId}.pdf`, data.Body); 
+            console.log(`./public/tmp/${bookId}/book${bookId}.pdf has been created!`);
         }).catch(function(err) {
           console.log(err);
         });

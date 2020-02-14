@@ -33,7 +33,7 @@ class PdfHandling {
     }
 
     deleteTempBookFolder(bookId){
-        const tempFolder = path.join(__dirname, `/tmp/${bookId}`); 
+        const tempFolder = path.join(__dirname, `/public/tmp/${bookId}`); 
         fs.readdirSync(tempFolder).filter((file) => {
             fs.unlinkSync(path.join(tempFolder, file));
         });
