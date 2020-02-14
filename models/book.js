@@ -8,7 +8,22 @@ module.exports = function(sequelize, DataTypes) {
       genre: {
           type: DataTypes.STRING,
           allowNull: true
+        },
+      type: {
+          type: DataTypes.STRING,
+          allowNull: true
+      },
+      description: {
+          type: DataTypes.TEXT,
+          allowNull: true
+      },
+      imageURL: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          isURL: true
         }
+      }
     });
     
     Book.associate = function(models) {

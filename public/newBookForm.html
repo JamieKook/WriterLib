@@ -30,7 +30,7 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h2>New Book Form</h2>
-        <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+        <form method="POST" enctype="multipart/form-data" name = "fileUploadForm" id="fileUploadForm">
           <div class="form-group">
               <label for="bookTitle">Book Title</label>
               <input type="text" class="form-control" id="bookTitle" placeholder="Title" name="title">
@@ -39,9 +39,23 @@
               <label for="bookGenre">Genre</label>
               <input type="text" class="form-control" id="bookGenre" placeholder="Genre" name="genre">
           </div>
+          <div class="form-group">
+            <label for="writingType">Type of Submission</label>
+            <input type="text" class="form-control" id="bookType" placeholder="Short Story" name="type">
+        </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Enter Book Description Here</label>
+            <textarea form= "fileUploadForm"  class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="bookImageUrl">Optional Cover Image URL</label>
+            <input type="text" class="form-control" id="bookImageUrl" placeholder="URL" name="url">
+          </div>
           <input type="file" name="bookFile"/><br/><br/>
           <input type="submit" value="Submit" id="btnSubmit"/>
         </form>
+
+        <div class="Success"></div>
       </div>
     </div>
   </div>

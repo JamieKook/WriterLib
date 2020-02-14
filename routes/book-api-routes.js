@@ -51,11 +51,17 @@ module.exports = function(app) {
         }
     }); 
 
-    app.post("/api/books/fileUpload", async function(req, res) {
+    app.post("/api/books/fileUpload", isAuthenticated, async function(req, res) {
         try {
+            console.log(req.body); 
+            console.log(req.user); 
             const results = await db.Book.create({
                 title: req.body.title,
                 genre: req.body.genre,
+                type: req.body.type,
+                description: req.body.description,
+                imageURL: req.body.url,
+                authorId: req.user.id
                 }); 
             const bookId = results.id;  
             if(!req.files) {
@@ -82,7 +88,8 @@ module.exports = function(app) {
              } 
              console.log(bookImgObs); 
            //render book handlebars here with imgPaths array
-            res.render("books", {book: bookImgObs});
+            // res.render("books", {book: bookImgObs});
+            res.json(results); 
                 // pdfHandling.deleteTempBookFolder(bookId); 
             }
             // res.status(200); 
