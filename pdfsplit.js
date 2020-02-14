@@ -5,24 +5,24 @@ const PDFImage = require("pdf-image").PDFImage;
 class PdfHandling { 
 
     createTempBookFolder(bookId){
-        const dir = `./tmp/${bookId}`;
+        const dir = `./public/tmp/${bookId}`;
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
         return dir; 
     }
 
-    addBookToFolder(bookId, fileName){
-        const file = path.join(__dirname,`../uploads/${bookId}/${fileName}`); 
-        const dest = path.join(__dirname,`../tmp/${bookId}/book${bookId}.pdf`);
-        fs.rename(file, dest, (err) =>{
-            if (err) throw err; 
-        }); 
-        return dest; 
-    }
+    // addBookToFolder(bookId, fileName){
+    //     const file = path.join(__dirname,`../uploads/${bookId}/${fileName}`); 
+    //     const dest = path.join(__dirname,`../tmp/${bookId}/book${bookId}.pdf`);
+    //     fs.rename(file, dest, (err) =>{
+    //         if (err) throw err; 
+    //     }); 
+    //     return dest; 
+    // }
 
     async createImages(bookId){
-        const pdfFile = path.join(__dirname, `/tmp/${bookId}/book${bookId}.pdf`); 
+        const pdfFile = path.join(__dirname, `/public/tmp/${bookId}/book${bookId}.pdf`); 
         const pdfImage = new PDFImage(pdfFile);
         let imagePaths = await pdfImage.convertFile()
         let imgPathObj = {}; 
@@ -33,7 +33,7 @@ class PdfHandling {
     }
 
     deleteTempBookFolder(bookId){
-        const tempFolder = path.join(__dirname, `/tmp/${bookId}`); 
+        const tempFolder = path.join(__dirname, `/public/tmp/${bookId}`); 
         fs.readdirSync(tempFolder).filter((file) => {
             fs.unlinkSync(path.join(tempFolder, file));
         });
