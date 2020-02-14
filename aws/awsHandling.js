@@ -52,7 +52,7 @@ class AwsHandling{
             Key: fileName
         };
     const getObjectPromise = s3.getObject(params).promise();
-        getObjectPromise.then(function(data) {
+            await getObjectPromise.then(function(data) {
             console.log(data); 
             pdfHandling.createTempBookFolder(bookId); 
             fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
@@ -60,11 +60,6 @@ class AwsHandling{
         }).catch(function(err) {
           console.log(err);
         });
-         
-
-       
-        // wait until the promise returns us a value
-         
     
     }
 

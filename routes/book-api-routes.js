@@ -34,15 +34,17 @@ module.exports = function(app) {
             await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
             const imgPaths = await pdfHandling.createImages(bookId); 
             console.log(imgPaths); 
-            const imgPathsArr = Object.values(imgPaths);
-            const bookImgObjs = []; 
-            for (const image of imgPathsArr){
-                const imgObj = {image: image}; 
-                bookImgObjs.push(imgObj); 
-            } 
-             console.log(bookImgObjs);  
+            const imgPathsArr = Object.values(imgPaths); 
+             console.log(imgPathsArr); 
+             let bookImgObs=[]; 
+             for (const image of imgPathsArr){
+                const path = image.replace("/Users/jamiekook/Repos/WriterLib/public/", "/");
+                let imgObj= {image: path}; 
+                bookImgObs.push(imgObj); 
+             } 
+             console.log(bookImgObs); 
            //render book handlebars here with imgPaths array
-           res.render("image", {book: bookImgObjs});
+            res.render("books",{book: bookImgObs}); 
         //    pdfHandling.deleteTempBookFolder(bookId); 
         } catch(err) {
             console.log(err); 
