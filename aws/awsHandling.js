@@ -24,13 +24,14 @@ class AwsHandling{
         };
 
         //Uploading files to the bucket
-        s3.upload(params, function(err, data) {
-            if (err) {
-                throw err;
-            }
+       const upload = s3.upload(params).promise();
+        upload.then(function(data) {
             console.log(`File uploaded successfully. ${data.Location}`);
-        }); 
-    }    
+        })
+        .catch(function(err) {
+            console.log(err);
+    });
+}    
     
     listObjects(){
        
@@ -50,30 +51,37 @@ class AwsHandling{
             Bucket: BUCKET_NAME, 
             Key: fileName
         };
-    
-        // s3.getObject(params, function(err, data) {
-        //     if (err) {
-        //         console.log(err, err.stack); // an error occurred
-        //     } else {
-        //         console.log(data); 
-        //         pdfHandling.createTempBookFolder(bookId); 
-        //         fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
-        //         console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`); 
-        //     }     
-        // });
-        await s3.getObject(params)
-        .promise()
-        .then( function(data) {
+    const getObjectPromise = s3.getObject(params).promise();
+        getObjectPromise.then(function(data) {
             console.log(data); 
             pdfHandling.createTempBookFolder(bookId); 
-            fs.writeFileSync(`./public/tmp/${bookId}/book${bookId}.pdf`, data.Body); 
-            console.log(`./public/tmp/${bookId}/book${bookId}.pdf has been created!`); 
-        })
-        .catch(function(err){
-            console.log(err); 
-        })
+            fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
+            console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`);
+        }).catch(function(err) {
+          console.log(err);
+        });
+         
+
+       
+        // wait until the promise returns us a value
+         
+    
     }
 
+    deleteFile() {
+        var params = {
+            Bucket: 'BUCKET_NAME',
+            Key: 'FILENAME'
+        };
+        s3.deleteObject(params, function (err, data) {
+            if (data) {
+                console.log("File deleted successfully");
+            }
+            else {
+                console.log("Check if you have sufficient permissions : "+err);
+            }
+        });
+    }
 }
 
 module.exports= AwsHandling; 
