@@ -82,7 +82,7 @@ module.exports = function(app) {
              } 
              console.log(bookImgObs); 
            //render book handlebars here with imgPaths array
-            res.render("books",{book: bookImgObs});
+            res.render("books", {book: bookImgObs});
                 // pdfHandling.deleteTempBookFolder(bookId); 
             }
             // res.status(200); 
