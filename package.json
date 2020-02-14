@@ -21,10 +21,14 @@
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.1",
     "morgan": "^1.9.1",
+    "mysql": "^2.18.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pdf-image": "^2.0.0",
-    "sequelize": "^5.8.6"
+
+    "sequelize": "^5.21.4",
+
+    "pdf-image": "^2.0.0"
+    
   }
 }

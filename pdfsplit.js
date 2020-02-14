@@ -27,7 +27,7 @@ class PdfHandling {
         let imagePaths = await pdfImage.convertFile()
         let imgPathObj = {}; 
         for (let i=0; i<imagePaths.length; i++){
-            imgPathObj[`imapge ${i}`] = imagePaths[i]; 
+            imgPathObj[`image ${i}`] = imagePaths[i]; 
         }  
         return imgPathObj; 
     }

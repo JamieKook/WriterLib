@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+        <link rel="stylesheet" href="stylesheets/style.css" type="text/css" />
+		<script src="https://code.jquery.com/jquery.js"></script>
+        {{!-- <script src="/path/to/handlebars.min.js"></script> --}}
+
+		<title>Writer's room</title>
+	</head>
+    <body>
+
+		{{{ body }}}
+
+    <ul>
+        {{#each book}}
+    	<li>
+  	        <p>Title: {{this.title}}</p>
+            <p>Author:{{this.author}}</p>
+  	    </li>
+         {{/each}}
+    </ul>
+    </body>
+    </html>

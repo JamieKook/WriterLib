@@ -1,5 +1,7 @@
 const path = require("path");
 
+const db = require("../models");
+
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -22,7 +24,12 @@ module.exports = function(app) {
 
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/home", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/home.html"));
+    // res.sendFile(path.join(__dirname, "../public/home.html"));
+    db.Book.findAll({})
+      .then(function(data){
+        console.log(data)
+      res.render("profile", data); 
+  });
   });
 
   //any user (logged in or not) can access the library
@@ -37,4 +44,5 @@ module.exports = function(app) {
   app.get("/addBook", function(req, res){
     res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
   }); 
+
 };
