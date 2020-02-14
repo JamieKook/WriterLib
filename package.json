@@ -1,5 +1,5 @@
 {
-  "name": "The Writer's Room",
+  "name": "writerlib",
   "version": "1.0.0",
   "description": "A place to share your writing",
   "main": "server.js",
