@@ -1,12 +1,11 @@
 {
-  "name": "1-Passport-Example",
+  "name": "writerlib",
   "version": "1.0.0",
-  "description": "",
+  "description": "A place to share your writing",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +25,10 @@
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^5.21.4"
+
+    "sequelize": "^5.21.4",
+
+    "pdf-image": "^2.0.0"
+    
   }
 }
