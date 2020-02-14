@@ -31,14 +31,19 @@ module.exports = function(app) {
     app.get("/api/books/fileDownload/:id", async function(req, res){
         try {
             const bookId= req.params.id; 
-          
             await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
             const imgPaths = await pdfHandling.createImages(bookId); 
             console.log(imgPaths); 
-            const imgPathsArr = Object.values(imgPaths); 
-             console.log(imgPathsArr);  
+            const imgPathsArr = Object.values(imgPaths);
+            const bookImgObjs = []; 
+            for (const image of imgPathsArr){
+                const imgObj = {image: image}; 
+                bookImgObjs.push(imgObj); 
+            } 
+             console.log(bookImgObjs);  
            //render book handlebars here with imgPaths array
-           pdfHandling.deleteTempBookFolder(bookId); 
+           res.render("image", {book: bookImgObjs});
+        //    pdfHandling.deleteTempBookFolder(bookId); 
         } catch(err) {
             console.log(err); 
         }

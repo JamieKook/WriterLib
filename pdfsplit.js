@@ -5,7 +5,7 @@ const PDFImage = require("pdf-image").PDFImage;
 class PdfHandling { 
 
     createTempBookFolder(bookId){
-        const dir = `./tmp/${bookId}`;
+        const dir = `./public/tmp/${bookId}`;
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
@@ -22,12 +22,12 @@ class PdfHandling {
     }
 
     async createImages(bookId){
-        const pdfFile = path.join(__dirname, `/tmp/${bookId}/book${bookId}.pdf`); 
+        const pdfFile = path.join(__dirname, `/public/tmp/${bookId}/book${bookId}.pdf`); 
         const pdfImage = new PDFImage(pdfFile);
         let imagePaths = await pdfImage.convertFile()
         let imgPathObj = {}; 
         for (let i=0; i<imagePaths.length; i++){
-            imgPathObj[`imapge ${i}`] = imagePaths[i]; 
+            imgPathObj[`image ${i}`] = imagePaths[i]; 
         }  
         return imgPathObj; 
     }

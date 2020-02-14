@@ -51,25 +51,27 @@ class AwsHandling{
             Key: fileName
         };
     
-        s3.getObject(params, function(err, data) {
-            if (err) {
-                console.log(err, err.stack); // an error occurred
-            } else {
-                console.log(data); 
-                pdfHandling.createTempBookFolder(bookId); 
-                fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
-                console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`); 
-            }     
-        });
-
-        let promise = new Promise((res, rej) => {
-            setTimeout(() => res("Now it's done!"), 1000)
-        });
-    
-        // wait until the promise returns us a value
-        let result = await promise; 
-        return result; 
-    
+        // s3.getObject(params, function(err, data) {
+        //     if (err) {
+        //         console.log(err, err.stack); // an error occurred
+        //     } else {
+        //         console.log(data); 
+        //         pdfHandling.createTempBookFolder(bookId); 
+        //         fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
+        //         console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`); 
+        //     }     
+        // });
+        await s3.getObject(params)
+        .promise()
+        .then( function(data) {
+            console.log(data); 
+            pdfHandling.createTempBookFolder(bookId); 
+            fs.writeFileSync(`./public/tmp/${bookId}/book${bookId}.pdf`, data.Body); 
+            console.log(`./public/tmp/${bookId}/book${bookId}.pdf has been created!`); 
+        })
+        .catch(function(err){
+            console.log(err); 
+        })
     }
 
 }
