@@ -19,10 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       imageURL: {
         type: DataTypes.STRING,
-        allowNull: true,
-        validate: {
-          isURL: true
-        }
+        allowNull: true
       }
     });
     

@@ -40,8 +40,6 @@ module.exports = function(app) {
         for (const book of dbBook){
           bookArr.push(book.dataValues); 
         }
-        console.log(bookArr); 
-        // res.json(dbBook); 
         res.render("library",{book: bookArr}); 
     }); 
   }); 

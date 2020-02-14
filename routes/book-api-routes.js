@@ -56,15 +56,25 @@ module.exports = function(app) {
     app.post("/api/books/fileUpload", isAuthenticated, async function(req, res) {
         try {
             console.log(req.body); 
-            console.log(req.user); 
+            console.log(req.user);
+            let userId = req.user.id; 
+            const authorData = await db.Author.findOne({
+                where: {
+                    UserId: userId
+                }
+            }); 
+
+            console.log(authorData);  
+            let authorId = authorData.id; 
             const results = await db.Book.create({
                 title: req.body.title,
                 genre: req.body.genre,
                 type: req.body.type,
                 description: req.body.description,
                 imageURL: req.body.url,
-                authorId: req.user.id
+                AuthorId: authorId
                 }); 
+            console.log(results); 
             const bookId = results.id;  
             if(!req.files) {
                 res.send({
