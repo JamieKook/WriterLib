@@ -9,7 +9,7 @@ const pdfHandling = new PdfHandling();
 module.exports = function(app) {
 
     app.get("/api/books", function(req, res){
-        db.Book.findAll({})
+        db.Book.findAll({include: db.Author})
             .then(function(dbBook){
                 console.log(dbBook); 
                 res.json(dbBook); 
