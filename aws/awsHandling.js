@@ -25,7 +25,7 @@ class AwsHandling{
 
         //Uploading files to the bucket
        const upload = s3.upload(params).promise();
-        upload.then(function(data) {
+        await upload.then(function(data) {
             console.log(`File uploaded successfully. ${data.Location}`);
         })
         .catch(function(err) {

@@ -68,23 +68,22 @@ module.exports = function(app) {
             } else {
                 let bookFile = req.files.bookFile;
                 console.log(bookFile);  
-                bookFile.mv(`./tmp/${bookId}/book${bookId}.pdf`);
+                bookFile.mv(`./public/tmp/${bookId}/book${bookId}.pdf`);
                 await awsHandling.upload(bookFile, bookId);
                 const imgPaths = await pdfHandling.createImages(bookId);
                 console.log(imgPaths); 
-                const imgPathsArr = Object.values(imgPaths); 
-                console.log(imgPathsArr); 
-                //add render function here to use image path array as code
-                res.send({
-                    status: true,
-                    message: "File is uploaded",
-                    data: {
-                        name: bookFile.name,
-                        mimetype: bookFile.mimetype,
-                        size: bookFile.size
-                    }
-                }); 
-                pdfHandling.deleteTempBookFolder(bookId); 
+            const imgPathsArr = Object.values(imgPaths); 
+             console.log(imgPathsArr); 
+             let bookImgObs=[]; 
+             for (const image of imgPathsArr){
+                const path = image.replace("/Users/jamiekook/Repos/WriterLib/public/", "/");
+                let imgObj= {image: path}; 
+                bookImgObs.push(imgObj); 
+             } 
+             console.log(bookImgObs); 
+           //render book handlebars here with imgPaths array
+            res.render("books",{book: bookImgObs});
+                // pdfHandling.deleteTempBookFolder(bookId); 
             }
             // res.status(200); 
             // res.json(results); 
