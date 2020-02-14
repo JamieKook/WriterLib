@@ -34,7 +34,16 @@ module.exports = function(app) {
 
   //any user (logged in or not) can access the library
   app.get("/library", function(req, res){
-    res.sendFile(path.join(__dirname, "../public/writerLibrary.html")); 
+    db.Book.findAll({})
+    .then(function(dbBook){
+        let bookArr= []; 
+        for (const book of dbBook){
+          bookArr.push(book.dataValues); 
+        }
+        console.log(bookArr); 
+        // res.json(dbBook); 
+        res.render("library",{book: bookArr}); 
+    }); 
   }); 
 
   app.get("/bookEditor", isAuthenticated, function(req, res){

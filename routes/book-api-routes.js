@@ -11,7 +11,9 @@ module.exports = function(app) {
     app.get("/api/books", function(req, res){
         db.Book.findAll({})
             .then(function(dbBook){
+                console.log(dbBook); 
                 res.json(dbBook); 
+                // res.render("library",{book: dbBook}); 
             }); 
     }); 
 

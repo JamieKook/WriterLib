@@ -31,10 +31,7 @@ module.exports = function(sequelize, DataTypes) {
           foreignKey: {
             allowNull: false
           }
-        });
-        Book.hasMany(models.Page, {
-            onDelete: "cascade"
-        });
+        })
     }; 
     return Book;
   };
