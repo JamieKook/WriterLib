@@ -1,5 +1,10 @@
 var db = require("../models");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+const path = require("path"); 
+const AwsHandling = require("../aws/awsHandling"); 
+const awsHandling = new AwsHandling();
+const PdfHandling = require("../pdfsplit"); 
+const pdfHandling = new PdfHandling(); 
 
 module.exports = function(app) {
 
@@ -23,15 +28,62 @@ module.exports = function(app) {
         });
     }); 
 
-    app.post("/api/books", function(req, res) {
-        db.Book.create(req.body)
-        .then(function(results) {
-        res.status(200); 
-        res.json(results); 
-        })
-        .catch(function(err) {
+    app.get("/api/books/fileDownload/:id", async function(req, res){
+        try {
+            const bookId= req.params.id; 
+          
+            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
+            const imgPaths = await pdfHandling.createImages(bookId); 
+            console.log(imgPaths); 
+            const imgPathsArr = Object.values(imgPaths); 
+             console.log(imgPathsArr);  
+           //render book handlebars here with imgPaths array
+           pdfHandling.deleteTempBookFolder(bookId); 
+        } catch(err) {
             console.log(err); 
-        });
+        }
+    }); 
+
+    app.post("/api/books/fileUpload", async function(req, res) {
+        try {
+            const results = await db.Book.create({
+                title: req.body.title,
+                genre: req.body.genre,
+                }); 
+            const bookId = results.id;  
+            if(!req.files) {
+                res.send({
+                    status: false,
+                    message: "No file uploaded",
+                    json: results
+ 
+                }); 
+            } else {
+                let bookFile = req.files.bookFile;
+                console.log(bookFile);  
+                bookFile.mv(`./tmp/${bookId}/book${bookId}.pdf`);
+                await awsHandling.upload(bookFile, bookId);
+                const imgPaths = await pdfHandling.createImages(bookId);
+                console.log(imgPaths); 
+                const imgPathsArr = Object.values(imgPaths); 
+                console.log(imgPathsArr); 
+                //add render function here to use image path array as code
+                res.send({
+                    status: true,
+                    message: "File is uploaded",
+                    data: {
+                        name: bookFile.name,
+                        mimetype: bookFile.mimetype,
+                        size: bookFile.size
+                    }
+                }); 
+                pdfHandling.deleteTempBookFolder(bookId); 
+            }
+            // res.status(200); 
+            // res.json(results); 
+        } catch (err) {
+            console.log(err); 
+        }
     });
 
     app.delete("/api/books/:id", isAuthenticated, function(){
