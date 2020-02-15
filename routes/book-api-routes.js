@@ -34,24 +34,24 @@ module.exports = function(app) {
         try {
             const bookId= req.params.id; 
             await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
-            const file = `./public/tmp/${bookId}/book${bookId}.pdf`;  
-            res.download(file);
+            // const file = `./public/tmp/${bookId}/book${bookId}.pdf`;  
+            // res.download(file);
             // var file = fs.createReadStream(filePath);
             // file.pipe(res);
             
-        //     const imgPaths = await pdfHandling.createImages(bookId); 
-        //     console.log(imgPaths); 
-        //     const imgPathsArr = Object.values(imgPaths); 
-        //      console.log(imgPathsArr); 
-        //      let bookImgObs=[]; 
-        //      for (const image of imgPathsArr){
-        //         const path = image.replace("public/", "/");
-        //         let imgObj= {image: path}; 
-        //         bookImgObs.push(imgObj); 
-        //      } 
-        //      console.log(bookImgObs); 
-        //    //render book handlebars here with imgPaths array
-        //     res.render("books",{book: bookImgObs}); 
+            const imgPaths = await pdfHandling.createImages(bookId); 
+            console.log(imgPaths); 
+            const imgPathsArr = Object.values(imgPaths); 
+             console.log(imgPathsArr); 
+             let bookImgObs=[]; 
+             for (const image of imgPathsArr){
+                const path = image.replace("public/", "/");
+                let imgObj= {image: path}; 
+                bookImgObs.push(imgObj); 
+             } 
+             console.log(bookImgObs); 
+           //render book handlebars here with imgPaths array
+            res.render("books",{book: bookImgObs}); 
         //    pdfHandling.deleteTempBookFolder(bookId); 
         } catch(err) {
             console.log(err); 
