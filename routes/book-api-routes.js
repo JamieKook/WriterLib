@@ -9,9 +9,11 @@ const pdfHandling = new PdfHandling();
 module.exports = function(app) {
 
     app.get("/api/books", function(req, res){
-        db.Book.findAll({})
+        db.Book.findAll({include: db.Author})
             .then(function(dbBook){
+                console.log(dbBook); 
                 res.json(dbBook); 
+                // res.render("library",{book: dbBook}); 
             }); 
     }); 
 
@@ -31,7 +33,12 @@ module.exports = function(app) {
     app.get("/api/books/fileDownload/:id", async function(req, res){
         try {
             const bookId= req.params.id; 
-            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId); 
+            await awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+            const filePath = `./public/tmp/${bookId}/book${bookId}.pdf`;  
+            // res.download(file);
+            // var file = fs.createReadStream(filePath);
+            // file.pipe(res);
+            
             const imgPaths = await pdfHandling.createImages(bookId); 
             console.log(imgPaths); 
             const imgPathsArr = Object.values(imgPaths); 
@@ -51,12 +58,28 @@ module.exports = function(app) {
         }
     }); 
 
-    app.post("/api/books/fileUpload", async function(req, res) {
+    app.post("/api/books/fileUpload", isAuthenticated, async function(req, res) {
         try {
+            console.log(req.body); 
+            console.log(req.user);
+            let userId = req.user.id; 
+            const authorData = await db.Author.findOne({
+                where: {
+                    UserId: userId
+                }
+            }); 
+
+            console.log(authorData);  
+            let authorId = authorData.id; 
             const results = await db.Book.create({
                 title: req.body.title,
                 genre: req.body.genre,
+                type: req.body.type,
+                description: req.body.description,
+                imageURL: req.body.url,
+                AuthorId: authorId
                 }); 
+            console.log(results); 
             const bookId = results.id;  
             if(!req.files) {
                 res.send({
@@ -82,7 +105,8 @@ module.exports = function(app) {
              } 
              console.log(bookImgObs); 
            //render book handlebars here with imgPaths array
-            res.render("books", {book: bookImgObs});
+            // res.render("books", {book: bookImgObs});
+            res.json(results); 
                 // pdfHandling.deleteTempBookFolder(bookId); 
             }
             // res.status(200); 

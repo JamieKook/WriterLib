@@ -34,14 +34,33 @@ module.exports = function(app) {
 
   //any user (logged in or not) can access the library
   app.get("/library", function(req, res){
-    res.sendFile(path.join(__dirname, "../public/writerLibrary.html")); 
+    db.Book.findAll({include: db.Author})
+    .then(function(dbBook){
+        let bookArr= []; 
+        for (const book of dbBook) {
+          bookArr.push(book.dataValues); 
+        }
+        for (const bookData of bookArr){
+          if (bookData.Author){
+            if (bookData.Author.usePseudonym){
+              bookData.authorName = bookData.Author.pseudonym; 
+            } else{
+              bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+            }
+          } else {
+            bookData.authorName = "Anonymous"; 
+          }
+        }
+        console.log(bookArr[0]); 
+        res.render("library",{book: bookArr}); 
+    }); 
   }); 
 
   app.get("/bookEditor", isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/bookEditor.html")); 
   }); 
 
-  app.get("/addBook", function(req, res){
+  app.get("/addBook",isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
   }); 
 

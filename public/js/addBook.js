@@ -1,11 +1,13 @@
-const bookFile= $("#inputGroupFile01"); 
+
 $(document).ready(function() {
-  const bookForm = $("form.addBook");
+  // const bookFile= $("#inputGroupFile01"); 
+  // const bookForm = $("form.addBook");
     $("#btnSubmit").click(function(){
       event.preventDefault();
 
       var form = $('#fileUploadForm')[0];
       var data = new FormData(form);
+      console.log(data); 
       // AJAX request
       $.ajax({
         type: "POST",
@@ -21,6 +23,7 @@ $(document).ready(function() {
             $("#result").text(data);
             console.log("SUCCESS : ", data);
             $("#btnSubmit").prop("disabled", false);
+            // window.location.href = "/library";
 
         },
         error: function (e) {
