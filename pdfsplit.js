@@ -22,6 +22,7 @@ class PdfHandling {
     }
 
     async createImages(bookId){
+        console.log("Into the create images method"); 
         const pdfFile =  `./public/tmp/${bookId}/book${bookId}.pdf`; 
         const pdfImage = new PDFImage(pdfFile);
         let imagePaths = await pdfImage.convertFile()
