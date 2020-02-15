@@ -8,7 +8,7 @@
             <li>Type:  {{type}}</li>
             <li>Description: {{description}}</li>
         </uL>
-        <button><a href="/book/{{id}}">Download Book</a></button>
+        <button><a href="/tmp/{{id}}/book{{id}}.pdf" download >Download Book</a></button>
         <form method="POST" enctype="multipart/form-data" name = "commentForm" id="commentForm">
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Add your comments about the book here</label>

@@ -1,7 +1,8 @@
 const path = require("path");
 
 const db = require("../models");
-
+const AwsHandling = require("../aws/awsHandling"); 
+const awsHandling = new AwsHandling(); 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -75,6 +76,7 @@ module.exports = function(app) {
         bookData.authorName = "Anonymous"; 
       }
         res.render("book",bookData); 
+        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
     });
   }); 
 
