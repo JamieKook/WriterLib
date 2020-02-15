@@ -8,7 +8,19 @@ module.exports = function(sequelize, DataTypes) {
       genre: {
           type: DataTypes.STRING,
           allowNull: true
-        }
+        },
+      type: {
+          type: DataTypes.STRING,
+          allowNull: true
+      },
+      description: {
+          type: DataTypes.TEXT,
+          allowNull: true
+      },
+      imageURL: {
+        type: DataTypes.STRING,
+        allowNull: true
+      }
     });
     
     Book.associate = function(models) {
@@ -16,10 +28,7 @@ module.exports = function(sequelize, DataTypes) {
           foreignKey: {
             allowNull: false
           }
-        });
-        Book.hasMany(models.Page, {
-            onDelete: "cascade"
-        });
+        })
     }; 
     return Book;
   };

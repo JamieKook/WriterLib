@@ -25,7 +25,7 @@ class AwsHandling{
 
         //Uploading files to the bucket
        const upload = s3.upload(params).promise();
-        upload.then(function(data) {
+        await upload.then(function(data) {
             console.log(`File uploaded successfully. ${data.Location}`);
         })
         .catch(function(err) {
@@ -52,19 +52,14 @@ class AwsHandling{
             Key: fileName
         };
     const getObjectPromise = s3.getObject(params).promise();
-        getObjectPromise.then(function(data) {
+            await getObjectPromise.then(function(data) {
             console.log(data); 
             pdfHandling.createTempBookFolder(bookId); 
-            fs.writeFileSync(`./tmp/${bookId}/book${bookId}.pdf`, data.Body); 
-            console.log(`./tmp/${bookId}/book${bookId}.pdf has been created!`);
+            fs.writeFileSync(`./public/tmp/${bookId}/book${bookId}.pdf`, data.Body); 
+            console.log(`./public/tmp/${bookId}/book${bookId}.pdf has been created!`);
         }).catch(function(err) {
           console.log(err);
         });
-         
-
-       
-        // wait until the promise returns us a value
-         
     
     }
 

@@ -1,0 +1,19 @@
+<div class= "container allBooks">
+    {{#each book}}
+    <div class = "container book">
+        <h3>{{title}}</h3>
+        <h4>By {{authorName}}</h4>
+        <img src="{{imageURL}}">
+        <uL>
+            <li>Genre: {{genre}}</li>
+            <li>Type:  {{type}}</li>
+            <li>Description: {{description}}</li>
+        </uL>
+        <button class="downloadBtn" data-bookid="{{id}}">Start Download?</button>
+    </div>
+    {{/each}}
+
+    <div class="container" hidden>
+        <h1><a href="">DOWNLOAD NOW</a></h1>
+    </div>
+</div>

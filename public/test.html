@@ -1,29 +1,51 @@
-<form class="form" action="./" method="POST">
-    <div class="form__title">Sign up</div>
-    <p class="form__desc">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, nostrum? Laudantium molestiae explicabo numquam animi corrupti debitis ratione, accusamus nemo optio eum vero nesciunt facere aperiam! Labore pariatur accusantium exercitationem.
-    </p>
-    <div class="form__item">
-      <label for="givennames" class="form__label">Given Names</label>
-      <input type="text" class="form__input" name="givennames" id="givennames" placeholder="Enter your given name(s)">
-      <span class="form__error">A sample error message</span>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+        <link rel="stylesheet" href="stylesheets/style.css" type="text/css" />
+		<script src="https://code.jquery.com/jquery.js"></script>
+
+		<title>Writer's room</title>
+	</head>
+    <body>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <div class="dropdown">
+      <a class="navbar-brand" href="/logout">
+        Logout
+      </a>
+      <a class="navbar-brand" href="/addBook">
+        Profile
+      </a>
+      </div>
     </div>
-    <div class="form__item">
-      <label for="numusers" class="form__label">Number of Users</label>
-      <input type="number" class="form__input form__input--small" name="numusers" id="numusers" min="1" max="5" placeholder="How many users? (Max. 5)">
-      <span class="form__error">A sample error message</span>
+  </div>
+</nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Welcome <span class="member-name"></span></h2>
+      </div>
     </div>
-    <div class="form__item">
-      <label for="expirydate" class="form__label">Expiration Date</label>
-      <input type="date" class="form__input form__input--small" name="expirydate" id="expirydate" placeholder="Enter an expiration date">
-      <span class="form__error">A sample error message</span>
-    </div>
-    <div class="form__item">
-      <label for="message" class="form__label">Message</label>
-      <textarea maxlength="500" class="form__input" name="message" id="message" placeholder="Enter a detailed message about why you wish to signup. (Max. 500 chars)"></textarea>
-      <span class="form__error">A sample error message</span>
-    </div>
-    <div class="form__item">
-      <button class="form__btn" type="submit">Sign Up</button>
-    </div>
-  </form>
+  </div>
+
+        <div>
+        <img src="/tmp/60/book60-0.png">
+        <img src="/tmp/60/book60-1.png">
+        <img src="/tmp/60/book60-2.png">
+        <img src="/tmp/60/book60-3.png">
+
+</div>
+    
+    
+</body>
+</html>

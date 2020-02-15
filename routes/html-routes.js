@@ -1,5 +1,7 @@
 const path = require("path");
 
+const db = require("../models");
+
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -22,15 +24,44 @@ module.exports = function(app) {
 
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/home", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/home.html"));
+    // res.sendFile(path.join(__dirname, "../public/home.html"));
+    db.Book.findAll({})
+      .then(function(data){
+        console.log(data)
+      res.render("profile", data); 
+  });
   });
 
   //any user (logged in or not) can access the library
   app.get("/library", function(req, res){
-    res.sendFile(path.join(__dirname, "../public/writerLibrary.html")); 
+    db.Book.findAll({include: db.Author})
+    .then(function(dbBook){
+        let bookArr= []; 
+        for (const book of dbBook) {
+          bookArr.push(book.dataValues); 
+        }
+        for (const bookData of bookArr){
+          if (bookData.Author){
+            if (bookData.Author.usePseudonym){
+              bookData.authorName = bookData.Author.pseudonym; 
+            } else{
+              bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+            }
+          } else {
+            bookData.authorName = "Anonymous"; 
+          }
+        }
+        console.log(bookArr[0]); 
+        res.render("library",{book: bookArr}); 
+    }); 
   }); 
 
   app.get("/bookEditor", isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/bookEditor.html")); 
   }); 
+
+  app.get("/addBook",isAuthenticated, function(req, res){
+    res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
+  }); 
+
 };
