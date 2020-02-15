@@ -37,11 +37,9 @@ module.exports = function(app) {
             // const file = `./public/tmp/${bookId}/book${bookId}.pdf`;  
             // res.download(file);
             // var file = fs.createReadStream(filePath);
-            // file.pipe(res);
-            console.log("Made it through aws"); 
-            const imgPaths = await pdfHandling.createImages(bookId); 
-            console.log("Made it through image method"); 
-            console.log(imgPaths); 
+            // file.pipe(res)
+           
+            const imgPaths = await pdfHandling.createImages(bookId);  
             const imgPathsArr = Object.values(imgPaths); 
              console.log(imgPathsArr); 
              let bookImgObs=[]; 
