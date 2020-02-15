@@ -1,13 +1,13 @@
 body{
-	background-image: url(https://images.app.goo.gl/fKDnrmFCqk4L3aeWA);
+	background-image: url(https://miro.medium.com/max/5120/1*42ebJizcUtZBNIZPmmMZ5Q.jpeg);
 	background-repeat: no-repeat;
 	background-position:center;
 }
 
-form.signup,
+/* form.signup, */
 form.login {
   margin-top: 50px;
-},
+}
 
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i&display=swap");
 

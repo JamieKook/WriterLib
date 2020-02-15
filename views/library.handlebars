@@ -9,11 +9,12 @@
             <li>Type:  {{type}}</li>
             <li>Description: {{description}}</li>
         </uL>
-        <button class="downloadBtn" data-bookid="{{id}}">Start Download?</button>
+        <button><a href="/book/{{id}}">View book</a></button>
+        {{!-- <button class="downloadBtn" data-bookid="{{id}}">Start Download?</button> --}}
     </div>
     {{/each}}
 
-    <div class="container" hidden>
-        <h1><a href="">DOWNLOAD NOW</a></h1>
-    </div>
+    {{!-- <div class="container" hidden>
+        
+    </div> --}}
 </div>

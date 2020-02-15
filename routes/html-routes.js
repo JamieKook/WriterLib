@@ -1,7 +1,8 @@
 const path = require("path");
 
 const db = require("../models");
-
+const AwsHandling = require("../aws/awsHandling"); 
+const awsHandling = new AwsHandling(); 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -56,12 +57,36 @@ module.exports = function(app) {
     }); 
   }); 
 
-  app.get("/bookEditor", isAuthenticated, function(req, res){
-    res.sendFile(path.join(__dirname, "../public/bookEditor.html")); 
+  app.get("/book/:id", function(req, res){
+    const bookId= req.params.id; 
+    db.Book.findOne({
+      where: {
+        id: bookId
+      },
+      include: db.Author})
+    .then(function(dbBook){
+     let bookData = dbBook.dataValues; 
+      if (bookData.Author){
+        if (bookData.Author.usePseudonym){
+          bookData.authorName = bookData.Author.pseudonym; 
+        } else{
+          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+        }
+      } else {
+        bookData.authorName = "Anonymous"; 
+      }
+        res.render("book",bookData); 
+        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+    });
   }); 
+
+
+  // app.get("/bookEditor", isAuthenticated, function(req, res){
+  //   res.sendFile(path.join(__dirname, "../public/bookEditor.html")); 
+  // }); 
 
   app.get("/addBook",isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
   }); 
 
-};
+}; 

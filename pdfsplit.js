@@ -22,14 +22,21 @@ class PdfHandling {
     }
 
     async createImages(bookId){
+        console.log("Into the create images method");
+        try {
         const pdfFile =  `./public/tmp/${bookId}/book${bookId}.pdf`; 
         const pdfImage = new PDFImage(pdfFile);
-        let imagePaths = await pdfImage.convertFile()
+        const imagePaths = await pdfImage.convertFile();
         let imgPathObj = {}; 
         for (let i=0; i<imagePaths.length; i++){
             imgPathObj[`image ${i}`] = imagePaths[i]; 
         }  
-        return imgPathObj; 
+        console.log(`pdfHanding return: ${imgPathObj}`); 
+        return imgPathObj;
+        } catch (err) {
+            console.log(err); 
+        }
+       
     }
 
     deleteTempBookFolder(bookId){
