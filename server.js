@@ -1,6 +1,7 @@
 // Requiring necessary npm packages
 require('dotenv').config();
 const express = require("express");
+const fs = require("fs"); 
 
 const fileUpload= require("express-fileupload"); 
 const cors = require("cors"); 
@@ -46,6 +47,10 @@ require("./routes/author-api-routes.js")(app);
 require("./routes/book-api-routes.js")(app);
 // require("./routes/upload-api-routes")(app); 
 
+const dir = `./public/tmp/`;
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }; 
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {

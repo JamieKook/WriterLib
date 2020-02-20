@@ -22,18 +22,25 @@ class PdfHandling {
     }
 
     async createImages(bookId){
-        const pdfFile = path.join(__dirname, `/public/tmp/${bookId}/book${bookId}.pdf`); 
+        console.log("Into the create images method");
+        try {
+        const pdfFile =  `./public/tmp/${bookId}/book${bookId}.pdf`; 
         const pdfImage = new PDFImage(pdfFile);
-        let imagePaths = await pdfImage.convertFile()
+        const imagePaths = await pdfImage.convertFile();
         let imgPathObj = {}; 
         for (let i=0; i<imagePaths.length; i++){
             imgPathObj[`image ${i}`] = imagePaths[i]; 
         }  
-        return imgPathObj; 
+        console.log(`pdfHanding return: ${imgPathObj}`); 
+        return imgPathObj;
+        } catch (err) {
+            console.log(err); 
+        }
+       
     }
 
     deleteTempBookFolder(bookId){
-        const tempFolder = path.join(__dirname, `/tmp/${bookId}`); 
+        const tempFolder = path.join(__dirname, `/public/tmp/${bookId}`); 
         fs.readdirSync(tempFolder).filter((file) => {
             fs.unlinkSync(path.join(tempFolder, file));
         });
@@ -41,21 +48,21 @@ class PdfHandling {
         console.log("deleted folder "+ bookId); 
     }
 
-    deleteUploadsBookFolder(bookId){
-        const uploadsFolder = path.join(__dirname, `/uploads/${bookId}`); 
-        fs.readdirSync(uploadsFolder).filter((file) => {
-            fs.unlinkSync(path.join(uploadsFolder, file));
-        });
-        fs.rmdirSync(uploadsFolder); 
-    }
+    // deleteUploadsBookFolder(bookId){
+    //     const uploadsFolder = path.join(__dirname, `/uploads/${bookId}`); 
+    //     fs.readdirSync(uploadsFolder).filter((file) => {
+    //         fs.unlinkSync(path.join(uploadsFolder, file));
+    //     });
+    //     fs.rmdirSync(uploadsFolder); 
+    // }
 
-    deleteDownloadsBookFolder(bookId){
-        const uploadsFolder = path.join(__dirname, `/downloads/${bookId}`); 
-        fs.readdirSync(downloadsFolder).filter((file) => {
-            fs.unlinkSync(path.join(downloadsFolder, file));
-        });
-        fs.rmdirSync(downloadsFolder); 
-    }
+    // deleteDownloadsBookFolder(bookId){
+    //     const downloadsFolder = path.join(__dirname, `/downloads/${bookId}`); 
+    //     fs.readdirSync(downloadsFolder).filter((file) => {
+    //         fs.unlinkSync(path.join(downloadsFolder, file));
+    //     });
+    //     fs.rmdirSync(downloadsFolder); 
+    // }
 
 }
 
