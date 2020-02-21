@@ -7,6 +7,31 @@ body {
 
 }
 
+h3 {
+    color: white; 
+}
+
+a {
+    color: #54422e; 
+    font-size: 2rem; 
+}
+
+a:hover {
+    color: #a3a294; 
+}
+
+a:active {
+    color: #a3a294; 
+}
+
+a:visited {
+    color: #a3a294; 
+}
+
+a:focus {
+    color: #a3a294; 
+}
+
 .comments{
     display: flex;
     flex-direction: column;
@@ -19,7 +44,7 @@ body {
 .speech-bubble {
     position: relative;
     padding: 25px; 
-    background: #f1efe0;
+    background: #54422e;
     margin: 25px; 
 	border-radius: .4em;
 }
@@ -32,7 +57,7 @@ body {
 	width: 0;
 	height: 0;
 	border: 31px solid transparent;
-	border-right-color: #f1efe0;
+	border-right-color: #54422e;
 	border-left: 0;
 	border-bottom: 0;
 	margin-top: -15.5px;
