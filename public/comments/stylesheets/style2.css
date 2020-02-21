@@ -1,0 +1,40 @@
+
+body {
+
+    background-image: url("/assets/images/adam-jang-8pOTAtyd_Mc-unsplash.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+
+}
+
+.comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    height: 100%; 
+    overflow: scroll; 
+}
+
+.speech-bubble {
+    position: relative;
+    padding: 25px; 
+    background: #f1efe0;
+    margin: 25px; 
+	border-radius: .4em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 31px solid transparent;
+	border-right-color: #f1efe0;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -15.5px;
+	margin-left: -31px;
+}

@@ -11,7 +11,11 @@ $(document).ready(function() {
         const comment = $("textarea").val();
         const data = {comment: comment};  
         console.log(data); 
-        $.post(`/api/comments/${bookId}`, data, function(data){
+        $.ajax({
+            url: `/api/comments/${bookId}`,
+            data: data,
+            method: "POST"
+        }).then(function(data){
             window.location.href = "/library";
         }); 
     }); 
@@ -23,7 +27,7 @@ $(document).ready(function() {
             url: `/api/books/${bookId}`,
             method: "DELETE"
         }).then(function(data){
-            window.location.href = "/home";
+            window.location.href = `/personalLibrary`;
         }); 
 
 

@@ -8,15 +8,16 @@ const pdfHandling = new PdfHandling();
 
 module.exports = function(app) {
 
+    //return all book data
     app.get("/api/books", function(req, res){
         db.Book.findAll({include: db.Author})
             .then(function(dbBook){
                 console.log(dbBook); 
                 res.json(dbBook); 
-                // res.render("library",{book: dbBook}); 
             }); 
     }); 
 
+    //return individual book data
     app.get("/api/books/:id", function(req,res){
         console.log(req.params.id); 
         db.Book.findOne({
@@ -30,6 +31,7 @@ module.exports = function(app) {
         });
     }); 
 
+    //download a file from aws
     app.get("/api/books/fileDownload/:id", async function(req, res){
         try {
             const bookId= req.params.id; 
@@ -57,6 +59,7 @@ module.exports = function(app) {
         }
     }); 
 
+    //upload a file to aws and create database for book
     app.post("/api/books/fileUpload", isAuthenticated, async function(req, res) {
         try {
             console.log(req.body); 
@@ -118,21 +121,8 @@ module.exports = function(app) {
         }
     });
 
-    app.delete("/api/books/:id", isAuthenticated, function(req, res){
-            db.Book.destroy({
-            where: {
-                id: req.params.id
-            }
-        }).then(function(book){
-            res.status(200); 
-            res.json(book); 
-        }).catch(function(err){
-            console.log(err); 
-        }); 
-    }); 
-
-
-    app.put("/api/edit/:id", isAuthenticated, async function(req, res) {
+    //edit specific book
+    app.put("/api/books/:id", isAuthenticated, async function(req, res) {
         try {
          
             const updates={
@@ -182,77 +172,19 @@ module.exports = function(app) {
         }
     });
 
-    app.delete("/api/books/:id", isAuthenticated, function(){
+
+    //delete specific book
+    app.delete("/api/books/:id", isAuthenticated, function(req, res){
         db.Book.destroy({
-            where: {
-                id: req.params.id
-            }
-        }).then(function(book){
-            res.json(book); 
-        }).catch(function(err){
-            res.status(404); 
-        }); 
+        where: {
+            id: req.params.id
+        }
+    }).then(function(book){
+        res.status(200); 
+        res.json(book); 
+    }).catch(function(err){
+        res.status(404); 
     }); 
-
-   app.put("/api/book/:id", isAuthenticated, function(){
-       db.Book.update(req.body,
-        {
-            where: {
-                id: req.params.id
-            }
-       }).then(function(book){
-           res.json(book); 
-       }).catch(function(err){
-           res.status(404); 
-       }); 
-   });
-   
-   app.get("/book/:id", function(req, res){
-    const bookId= req.params.id; 
-    db.Book.findOne({
-      where: {
-        id: bookId
-      },
-      include: db.Author})
-    .then(function(dbBook){
-     let bookData = dbBook.dataValues; 
-      if (bookData.Author){
-        if (bookData.Author.usePseudonym){
-          bookData.authorName = bookData.Author.pseudonym; 
-        } else{
-          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
-        }
-      } else {
-        bookData.authorName = "Anonymous"; 
-      }
-        res.render("book",bookData); 
-        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
-    });
-  }); 
-
-    app.get("/personalBooks/:id", isAuthenticated, function(req, res){
-    const bookId= req.params.id; 
-    db.Book.findOne({
-      where: {
-        id: bookId
-      },
-      include: [db.Author, db.Comment]
-    })
-    .then(function(dbBook){
-     let bookData = dbBook.dataValues; 
-     console.log(bookData); 
-      if (bookData.Author){
-        if (bookData.Author.usePseudonym){
-          bookData.authorName = bookData.Author.pseudonym; 
-        } else{
-          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
-        }
-      } else {
-        bookData.authorName = "Anonymous"; 
-      }
-        res.render("personalBook",bookData); 
-        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
-    });
+}); 
     
-  }); 
 }; 
