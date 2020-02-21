@@ -1,26 +1,30 @@
 const path =  require ("path"); 
 const fs = require ("fs"); 
 const PDFImage = require("pdf-image").PDFImage; 
-const PDF2Pic = require("pdf2pic");
+const pdf = require('pdf-poppler');
+
 
 class PdfHandling { 
 
     async otherCreate(bookId){
+        let file = `./public/tmp/${bookId}/book${bookId}.pdf`; 
         
- 
-        const pdf2pic = new PDF2Pic({
-          density: 100,           // output pixels per inch
-          savename: "untitled",   // output file name
-          savedir: "./images",    // output file location
-          format: "png",          // output file format
-          size: "600x600"         // output size in pixels
-        });
-         
-        pdf2pic.convertBulk("path/to/pdf/sample.pdf", [1,4,6]).then((resolve) => {
-          console.log("image converter successfully!");
-         
-          return resolve;
-        });
+        let opts = {
+            format: 'jpeg',
+            out_dir: path.dirname(file),
+            out_prefix: path.baseName(file, path.extname(file)),
+            page: null
+        }
+        
+        pdf.convert(file, opts)
+            .then(res => {
+                console.log('Successfully converted');
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
+        const outputFolder = path.join(__dirname, "/output"); 
     }
 
     createTempBookFolder(bookId){

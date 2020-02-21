@@ -1,13 +1,18 @@
 $(document).ready(function() {
-
-    $(".downloadBtn").on("click", function(event){
+    $("#btnDownload").on("click", function(event){
+        console.log("clicked"); 
+        $(".feedback").show();  
+        }); 
+    
+    $("#btnSubmit").on("click", function(event){
         event.preventDefault(); 
         const bookId = $(this).data("bookid"); 
-        $.ajax({
-            url: `/api/books/fileDownload/${bookId}`,
-            type: "GET",
-        }).then(function(file){
-          
-        })
+        console.log(bookId); 
+        const comment = $("textarea").val();
+        const data = {comment: comment};  
+        console.log(data); 
+        $.post(`/api/comments/${bookId}`, data, function(data){
+            window.location.href = "/library";
+        }); 
     }); 
 }); 

@@ -2,7 +2,7 @@ const AWS = require('aws-sdk');
 const ID = process.env.ID;
 const SECRET = process.env.SECRET;
 
-const BUCKET_NAME = process.env.BUCKET_NAME;
+const BUCKET_NAME = process.env.BUCKET;
 
 const s3 = new AWS.S3({
     accessKeyId: ID,
@@ -10,7 +10,7 @@ const s3 = new AWS.S3({
 });
 
 const params = {
-    Bucket: BUCKET_NAME,
+    Bucket: BUCKET,
     CreateBucketConfiguration: {
         LocationConstraint: "eu-west-1"
     }
