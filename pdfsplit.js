@@ -1,6 +1,6 @@
 const path =  require ("path"); 
 const fs = require ("fs"); 
-const PDFImage = require("pdf-image").PDFImage; 
+// const PDFImage = require("pdf-image").PDFImage; 
 
 
 
