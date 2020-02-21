@@ -1,7 +1,7 @@
 const path =  require ("path"); 
 const fs = require ("fs"); 
 const PDFImage = require("pdf-image").PDFImage; 
-const pdf = require('pdf-poppler');
+
 
 
 class PdfHandling { 
