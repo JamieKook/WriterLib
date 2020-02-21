@@ -1,20 +1,83 @@
-<div class= "container allBooks">
-    {{#each book}}
-    <div class = "container book">
-        <h3>{{title}}</h3>
-        <h4>By {{authorName}}</h4>
-        <img src="{{imageURL}}">
-        <uL>
-            <li>Genre: {{genre}}</li>
-            <li>Type:  {{type}}</li>
-            <li>Description: {{description}}</li>
-        </uL>
-        <button><a href="/book/{{id}}">View book</a></button>
-        {{!-- <button class="downloadBtn" data-bookid="{{id}}">Start Download?</button> --}}
-    </div>
-    {{/each}}
+<div class= "library">
 
-    {{!-- <div class="container" hidden>
-        
-    </div> --}}
+    <div class ="container books">   
+        <div class = "row topBand text-center">
+            <h2><a class="searchQuestion">Looking for Something Specific?</a></h2>
+            <div class="searchOptions" hidden>
+                 <div class="col-md-4">
+                    <div class="choices"> 
+                        <label for="filterGenre">Filter By Genre:</label>
+                        <select class="form-control" id="filterGenre">
+                        <option>All</option>
+                        <option>Fantasy</option>
+                        <option>Drama</option>
+                        <option>Science fiction</option>
+                        <option>Horror</option>
+                        <option>Western</option>
+                        <option>Romance</option>
+                        <option>Thriller</option>
+                        <option>Mystery</option>
+                         <option>Other</option>
+                        </select>
+                </div>
+                <div class="choices"> 
+                    <label for="filterType">Filter By Submission Type:</label>
+                    <select class="form-control" id="filterType">
+                    <option>All</option>
+                    <option>Novel</option>
+                    <option>Short Story</option>
+                    <option>Poem</option>
+                    <option>Article</option>
+                    <option>Other</option>
+                    </select>
+                </div>
+            </div>
+                <div class="col-md-4">
+                    <div class="choices"> 
+                        <label for="searchBy">Search By:</label>
+                        <select class="form-control" id="searchBy">
+                        <option>All Submissions</option>
+                        <option>Title</option>
+                        <option>Author Name</option>
+                        <option>Keyword</option>
+                        </select>
+                    </div>
+                </div>
+               
+            <div class ="col-md-4">
+                <div class ="search">
+                    <form id ="searchForm" action="">
+                        <input id="search" type="search">
+                         <button type="submit" class="searchBtn"><i class="fa fa-search"></button></i>
+                    </form>
+                </div>
+            </div>
+            </div>  
+        </div> 
+    
+    <div class="bookgall">
+        {{#each book}}
+            <div class="card text-center" data-keywords= "{{keywords}}">
+                <img src="{{imageURL}}" height="200" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    <div class="card-text">
+                        <h6>By {{authorName}}</h6>
+                        <p>Genre: {{genre}}</p>
+                        <p>Type:  {{type}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button><a href="/book/{{id}}">View book</a></button>
+                </div>
+            </div>
+        {{/each}} 
+    </div>
+       
+    </div>
+
+      <div id ="bookshelfImg"> </div>
+
 </div>
+  
+

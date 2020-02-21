@@ -32,6 +32,11 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+
+    Author.hasMany(models.Comment, {
+      onDelete: "cascade"
+    });
+
   };
   return Author;
 };
