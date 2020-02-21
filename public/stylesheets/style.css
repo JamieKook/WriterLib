@@ -234,7 +234,7 @@ a.pure-button-primary {
   color: rgb(231, 191, 13);
   letter-spacing: 0.05em;
   opacity: 1.5;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Dancing Script';
   font-size: x-large;
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
   padding-top: 20px;
@@ -332,7 +332,7 @@ height:150px;
 .header2
 {
   height: 400px;
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(cityscape.jpg);
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(assets/openBook.jpeg);
   background-size: cover;
   background-position: center;
   display: flex;
