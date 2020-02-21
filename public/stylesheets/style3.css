@@ -1,0 +1,188 @@
+@tailwind preflight;
+
+/* Here we can add any custom overrides */
+
+.field {
+  @apply .border .py-2 .px-3 .text-grey-darkest;
+}
+
+.field-label {
+  @apply .uppercase .font-bold .text-lg .text-grey-darkest .mb-2;
+}
+
+.field-group {
+  @apply .flex .flex-col;
+}
+
+.btn {
+  @apply .block .text-white .uppercase .text-lg .p-4 .rounded;
+}
+
+.btn-teal {
+  @apply .bg-teal;
+}
+
+.btn-teal:hover {
+  @apply .bg-teal-dark;
+}
+
+.link {
+  @apply .block .no-underline .text-sm;
+}
+
+.link-grey {
+  @apply .text-grey-dark;
+}
+
+.link-grey:hover {
+  @apply .text-grey-darker;
+}
+
+@tailwind utilities;
+
+body{
+	background-repeat: no-repeat;
+	background-position:center;
+}
+
+
+html, body {
+  margin: 0; padding: 0;
+}
+
+body {
+  background:url(https://i.guim.co.uk/img/media/d305370075686a053b46f5c0e6384e32b3c00f97/0_50_5231_3138/master/5231.jpg?width=300&quality=85&auto=format&fit=max&s=4432c7c82aba2cd2e3af2b1a791e9af5) repeat 0 0;
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  padding-top: 120px;
+  /* box-sizing: border-box; */
+  -webkit-animation: slide 20s linear infinite;
+  animation: slide 20s linear infinite;
+}
+
+/* #hero-bkg-animated h1 {
+  font-family: sans-serif;
+} */
+
+@-webkit-keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -400px 0; }
+}
+
+
+
+ /* .form.signup,
+.form.login {
+  margin-top: 100px;
+}  */
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i&display=swap");
+
+/* .form {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+}
+
+.form * {
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.form__title {
+  font-size: 2em;
+  font-weight: 600;
+} */
+
+/* .form__item {
+  display: flex;
+  flex-direction: column;
+} */
+
+/* .form__item > * {
+  align-self: flex-start;
+} */ */
+
+/* .form__label {
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+/* .form__input {
+  -webkit-appearance: none;
+
+  width: 100%;
+  max-width: 425px; */
+
+  /* Fix for Safari/iOS date fields */
+   /* min-height: calc(0.9em + (0.8em * 2) + 0.6em);
+
+  padding: 0.8em;
+  font-size: 0.9em;
+  font-family: "Source Sans Pro", sans-serif;
+
+  outline: none;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+  transition: 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.form__input:focus {
+  background: #ffffff;
+} */
+
+/* #form__input::placeholder {
+  color: #bbbbbb;
+}
+
+#form__input--error {
+  color: #d50000;
+  background: #fff8f8;
+  border-color: #d50000;
+}
+
+#form__input--error::placeholder {
+  color: #ffbfbf;
+} */
+
+/* #form__error {
+  padding-top: 10px;
+  color: #d50000;
+  font-size: 0.9em;
+  visibility: hidden;
+}
+
+#form__input--error + .form__error {
+  visibility: visible;
+}
+
+#form__input--small {
+  max-width: 250px;
+}
+
+/* textarea.form__input {
+  resize: none;
+  min-height: 200px;
+} */
+
+/*#form__btn {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  padding: 10px 16px;
+  margin: 10px 0;
+
+  color: #ffffff;
+  background: #14b64a;
+  border: 2px solid #0fa942;
+  border-radius: 5px;
+
+  cursor: pointer;
+  outline: none;
+}
+
+#form__btn:active {
+  background: #0fa942;
+} 
+  */
