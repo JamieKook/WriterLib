@@ -179,12 +179,46 @@ module.exports = function(app) {
         where: {
             id: req.params.id
         }
-    }).then(function(book){
-        res.status(200); 
-        res.json(book); 
-    }).catch(function(err){
-        res.status(404); 
+        }).then(function(book){
+            res.status(200); 
+            res.json(book); 
+        }).catch(function(err){
+            res.status(404); 
+        }); 
     }); 
-}); 
+
+app.get("/api/:filter/:choice", function(req, res){
+    if (req.params.filter === "genre"){
+        db.Book.findAll({
+        include: db.Author,
+        where: {
+            genre: req.params.choice
+        }
+        }).then(function(dbBook){
+            dataArrange(dbBook, res); 
+        }); 
+    } else if (req.params.filter === "type"){
+        db.Book.findAll({
+            include: db.Author,
+            where: {
+                type: req.params.choice
+            }
+            }).then(function(dbBook){
+                dataArrange(dbBook, res); 
+            }); 
+    } else if (req.params.filter === "both"){
+        let genre= req.params.choice.split("-")[0]; 
+        let type = req.params.choice.split("-")[1]; 
+        db.Book.findAll({
+            include: db.Author,
+            where: {
+                genre: genre,
+                type: type
+            }
+            }).then(function(dbBook){
+                dataArrange(dbBook, res); 
+            }); 
+    }
+});
     
 }; 

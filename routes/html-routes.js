@@ -44,6 +44,7 @@ module.exports = function(app) {
             UserId: userId
         }
     });
+    console.log(authorData.dataValues); 
     res.render("profile", authorData.dataValues); 
   });
 
