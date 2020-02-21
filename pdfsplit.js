@@ -1,9 +1,27 @@
 const path =  require ("path"); 
 const fs = require ("fs"); 
 const PDFImage = require("pdf-image").PDFImage; 
-
+const PDF2Pic = require("pdf2pic");
 
 class PdfHandling { 
+
+    async otherCreate(bookId){
+        
+ 
+        const pdf2pic = new PDF2Pic({
+          density: 100,           // output pixels per inch
+          savename: "untitled",   // output file name
+          savedir: "./images",    // output file location
+          format: "png",          // output file format
+          size: "600x600"         // output size in pixels
+        });
+         
+        pdf2pic.convertBulk("path/to/pdf/sample.pdf", [1,4,6]).then((resolve) => {
+          console.log("image converter successfully!");
+         
+          return resolve;
+        });
+    }
 
     createTempBookFolder(bookId){
         const dir = `./public/tmp/${bookId}`;
@@ -72,10 +90,7 @@ class PdfHandling {
                 //checks to see if folder has been there for longer than an hour
                const hourOld= parseInt(file)+ 3.6e+6; 
                console.log(`the expiration is ${hourOld}`); 
-               //test crap
-               const test = parseInt(1581795801203); 
-               console.log (`the test is ${test}`); 
-                if (hourOld === test){
+                if (hourOld < currentTime){
                     isOld=true; 
                     console.log(folderName); 
                     const oldPdf = folderName.replace("./public/tmp/", "book")+".pdf";

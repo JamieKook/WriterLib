@@ -52,6 +52,7 @@ const dir = `./public/tmp/`;
             fs.mkdirSync(dir);
         }; 
 
+//set interval for deleting folders
 const PdfHandling = require("./pdfsplit"); 
 const pdfHandling = new PdfHandling(); 
 pdfHandling.deleteOldTempBookFolder(Date.now()); 

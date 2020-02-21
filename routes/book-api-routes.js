@@ -38,19 +38,19 @@ module.exports = function(app) {
             // res.download(file);
             // var file = fs.createReadStream(filePath);
             // file.pipe(res)
-           
-            const imgPaths = await pdfHandling.createImages(bookId);  
-            const imgPathsArr = Object.values(imgPaths); 
-             console.log(imgPathsArr); 
-             let bookImgObs=[]; 
-             for (const image of imgPathsArr){
-                const path = image.replace("public/", "/");
-                let imgObj= {image: path}; 
-                bookImgObs.push(imgObj); 
-             } 
-             console.log(bookImgObs); 
-           //render book handlebars here with imgPaths array
-            res.render("books",{book: bookImgObs}); 
+            await pdfHandling.otherCreate(bookId); 
+        //     const imgPaths = await pdfHandling.createImages(bookId);  
+        //     const imgPathsArr = Object.values(imgPaths); 
+        //      console.log(imgPathsArr); 
+        //      let bookImgObs=[]; 
+        //      for (const image of imgPathsArr){
+        //         const path = image.replace("public/", "/");
+        //         let imgObj= {image: path}; 
+        //         bookImgObs.push(imgObj); 
+        //      } 
+        //      console.log(bookImgObs); 
+        //    //render book handlebars here with imgPaths array
+        //     res.render("books",{book: bookImgObs}); 
         //    pdfHandling.deleteTempBookFolder(bookId); 
         } catch(err) {
             console.log(err); 
