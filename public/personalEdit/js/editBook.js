@@ -24,7 +24,7 @@ $(document).ready(function() {
             $("#result").text(data);
             console.log("SUCCESS : ", data);
             $("#btnSubmit").prop("disabled", false);
-            window.location.href = "/library";
+            window.location.href = "/home";
 
         },
         error: function (e) {

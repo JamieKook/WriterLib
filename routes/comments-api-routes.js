@@ -1,8 +1,7 @@
 var db = require("../models");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const path = require("path"); 
-const AwsHandling = require("../aws/awsHandling"); 
-const awsHandling = new AwsHandling();
+
 
 
 module.exports = function(app) {
