@@ -1,0 +1,60 @@
+  <div class="container editBook">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 bookform p-5">
+        <h2>Edit Book</h2>
+        <form class="p-5" method="POST" enctype="multipart/form-data" name = "fileUploadForm" id="fileUploadForm">
+          <div class="form-group">
+              <label for="bookTitle">Book Title</label>
+              <input type="text" class="form-control" id="bookTitle" placeholder="{{title}}" name="title">
+          </div>
+          <div class="form-group">
+              <label for="bookGenre">Genre</label>
+              <select form= "fileUploadForm" class="form-control" id="bookGenre" name="genre">
+                <option>{{genre}}</option>
+                <option>Fantasy</option>
+                <option>Drama</option>
+                <option>Science fiction</option>
+                <option>Horror</option>
+                <option>Western</option>
+                <option>Romance</option>
+                <option>Thriller</option>
+                <option>Mystery</option>
+                <option>Other</option>
+              </select>
+            </div>
+          <div class="form-group">
+            <label for="writingType">Type of Submission</label>
+            <select form= "fileUploadForm" class="form-control" id="bookType" name="type">
+              <option>{{type}}</option>
+              <option>Novel</option>
+              <option>Short Story</option>
+              <option>Poem</option>
+              <option>Article</option>
+              <option>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="keywords">Enter any keywords for your story (separate each with a comma)</label>
+            <input type="text" class="form-control" id="keywords" placeholder="{{keywords}}" name="keywords">
+        </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Enter Book Description Here</label>
+            <textarea form= "fileUploadForm"  class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="{{description}}"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="bookImageUrl">Cover Image URL</label>
+            <input type="text" class="form-control" id="bookImageUrl" placeholder="{{imageURL}}" name="url">
+          </div>
+          <label for="fileSubmit">Upload a PDF file of your submission</label>
+          <br>
+          <input id="fileSubmit" type="file" name="bookFile"/><br/><br/>
+          <input class="submitbutton" type="submit" value="Submit" id="btnSubmit"/>
+        </form>
+        <div class="p-5"></div>
+        <div class="Success"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/editBook.js"></script>

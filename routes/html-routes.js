@@ -73,7 +73,7 @@ module.exports = function(app) {
     }); 
   }); 
 
-  app.get("/personalBooks", isAuthenticated, async function(req, res){
+  app.get("/personalLibrary", isAuthenticated, async function(req, res){
     const userId= req.user.id; 
     const authorData = await db.Author.findOne({
       include: db.Book, 
@@ -110,11 +110,25 @@ module.exports = function(app) {
       } else {
         bookData.authorName = "Anonymous"; 
       }
-        res.render("book",bookData); 
+        res.render("personalBook",bookData); 
         awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
     });
     
   }); 
+
+  app.get("/personalEdit/:id", function(req, res){
+    const bookId= req.params.id; 
+    db.Book.findOne({
+      where: {
+        id: bookId
+      }
+    })
+    .then(function (dbBook){
+      console.log(dbBook.dataValues); 
+      res.render("editBook", dbBook.dataValues); 
+    }); 
+    
+  })
 
   app.get("/book/:id", function(req, res){
     const bookId= req.params.id; 
