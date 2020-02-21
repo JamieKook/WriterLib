@@ -1,0 +1,22 @@
+<div class= "Personallibrary">
+
+    <div class ="container bookgall">
+        {{#each book}}
+            <div class="card personal text-center">
+                <img src="{{imageURL}}" height="200" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    <div class="card-text">
+                        <h6>Your book</h6>
+                        <p>Genre: {{genre}}</p>
+                        <p>Type:  {{type}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class=""><a href="/personalBooks/{{id}}">View Your Book</a></button>
+                </div>
+            </div>
+        {{/each}} 
+    </div>
+</div>
+  

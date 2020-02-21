@@ -1,20 +1,36 @@
-<div class="container">
-    <div class = "container book">
-        <h3>{{title}}</h3>
-        <h4>By {{authorName}}</h4>
-        <img src="{{imageURL}}">
-        <uL>
-            <li>Genre: {{genre}}</li>
-            <li>Type:  {{type}}</li>
-            <li>Description: {{description}}</li>
-        </uL>
-        <button><a href="/tmp/{{id}}/book{{id}}.pdf" download >Download Book</a></button>
-        <form method="POST" enctype="multipart/form-data" name = "commentForm" id="commentForm">
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Add your comments about the book here</label>
-            <textarea form= "commentForm"  class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+<div class="text-center">
+  <div class="title">
+    <h1>{{title}}</h1>
+    <h2>By {{authorName}}</h2>
+  </div>
+  
+    <div class = "row book">
+       <div class ="col-md-6 picture">
+          <img class="bookImg" src="{{imageURL}}">
+       </div>
+       <div class = "col-md-6 text-left">
+         <div class="about">
+            <h2>Book Description: </h2>
+            <br>
+            <h4>{{description}}</h4>
+            <br>
+            <button type="button" class="btn btn-light p-4 border border-secondary" id="btnDownload"><a href="/tmp/{{id}}/book{{id}}.pdf" download >Download Book</a></button>
+            <br><br>
+            <div class="feedback" hidden>
+              <h2>Did you like the Book?</h2>
+              <h4>Let the author know!</h4>
+              <form>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Add your constructive comments about the book here:</label>
+                <textarea form= "commentForm"  class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+              </div>
+              <input type="submit" data-bookid="{{id}}" class="btn btn-light p-4 border border-secondary"  value="Submit" id="btnSubmit"/>
+            </form>
           </div>
-          <input type="submit" value="Submit" id="btnSubmit"/>
-        </form>
+        </div>
+          
+       </div>
+       
+        
     </div>
 </div>
