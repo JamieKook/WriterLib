@@ -63,7 +63,7 @@ $(document).ready(function() {
   function addAuthorData(authorData){
     $.post("/api/authors", authorData)
       .then(function(data){
-        window.location.replace("/home");
+        window.location.replace("/login");
       })
       .catch(handleLoginErr(err));
   }

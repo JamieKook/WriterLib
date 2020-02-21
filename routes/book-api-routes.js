@@ -6,6 +6,26 @@ const awsHandling = new AwsHandling();
 const PdfHandling = require("../pdfsplit"); 
 const pdfHandling = new PdfHandling(); 
 
+
+function dataArrange(dbBook, res){
+    let bookArr= []; 
+        for (const book of dbBook) {
+        bookArr.push(book.dataValues); 
+        }
+        for (const bookData of bookArr){
+        if (bookData.Author){
+            if (bookData.Author.usePseudonym){
+            bookData.authorName = bookData.Author.pseudonym; 
+            } else{
+            bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+            }
+        } else {
+            bookData.authorName = "Anonymous"; 
+        }
+        }
+        res.json(bookArr);  
+}; 
+
 module.exports = function(app) {
 
     //return all book data
