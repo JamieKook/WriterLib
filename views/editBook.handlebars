@@ -45,10 +45,10 @@
             <label for="bookImageUrl">Cover Image URL</label>
             <input type="text" class="form-control" id="bookImageUrl" placeholder="{{imageURL}}" name="url">
           </div>
-          <label for="fileSubmit">Upload a PDF file of your submission</label>
+          <label for="fileSubmit">Upload a revised PDF file of your submission or it will keep current copy</label>
           <br>
           <input id="fileSubmit" type="file" name="bookFile"/><br/><br/>
-          <input class="submitbutton" type="submit" value="Submit" id="btnSubmit"/>
+          <input class="submitbutton" type="submit" value="Submit Changes" data-bookid="{{id}}" id="btnSubmit"/>
         </form>
         <div class="p-5"></div>
         <div class="Success"></div>
