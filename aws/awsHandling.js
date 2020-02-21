@@ -4,7 +4,7 @@ const PdfHandling = require("../pdfsplit");
 const pdfHandling = new PdfHandling(); 
 const ID = process.env.ID;
 const SECRET = process.env.SECRET;
-const BUCKET_NAME = process.env.BUCKET_NAME;
+const BUCKET_NAME = process.env.BUCKET;
 
 const s3 = new AWS.S3({
     accessKeyId: ID,
@@ -63,20 +63,20 @@ class AwsHandling{
     
     }
 
-    deleteFile() {
-        var params = {
-            Bucket: 'BUCKET_NAME',
-            Key: 'FILENAME'
-        };
-        s3.deleteObject(params, function (err, data) {
-            if (data) {
-                console.log("File deleted successfully");
-            }
-            else {
-                console.log("Check if you have sufficient permissions : "+err);
-            }
-        });
-    }
+    // deleteFile() {
+    //     var params = {
+    //         Bucket: 'BUCKET_NAME',
+    //         Key: 'FILENAME'
+    //     };
+    //     s3.deleteObject(params, function (err, data) {
+    //         if (data) {
+    //             console.log("File deleted successfully");
+    //         }
+    //         else {
+    //             console.log("Check if you have sufficient permissions : "+err);
+    //         }
+    //     });
+    // }
 }
 
 module.exports= AwsHandling; 

@@ -52,6 +52,11 @@ const dir = `./public/tmp/`;
             fs.mkdirSync(dir);
         }; 
 
+//set interval for deleting folders
+const PdfHandling = require("./pdfsplit"); 
+const pdfHandling = new PdfHandling(); 
+pdfHandling.deleteOldTempBookFolder(Date.now()); 
+
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {

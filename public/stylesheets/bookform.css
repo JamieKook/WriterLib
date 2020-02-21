@@ -1,0 +1,17 @@
+body {
+    background-image: url("/assets/images/aaron-burden-y02jEX_B0O0-unsplash.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.bookform {
+    background-color: rgba(163,162,148, 0.85); 
+}
+
+.submitbutton {
+    margin-bottom: 40px; 
+}
+
+.newBook {
+    margin-top: 100px; 
+}

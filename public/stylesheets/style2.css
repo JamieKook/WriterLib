@@ -1,0 +1,174 @@
+.landingMain {
+    background-image: url("/assets/images/matteo-maretto-toF6uojkBag-unsplash.jpg");
+    background-size: cover;
+    min-height: 400px; 
+    display: flex; 
+    align-items: center;
+}
+
+h1 {
+    color: white; 
+    font-size: 5rem; 
+}
+
+h2, label {
+    color: white; 
+}
+.fas{
+    font-size: xx-large;
+}
+
+.action {
+    font-size: 4rem ;
+}
+
+a {
+    color: black 
+}
+
+.card {
+    width: 300px; 
+    overflow: hidden;
+}
+
+.bookgall {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center;
+    width: 68%; 
+    padding: 0; 
+    margin: 0 auto; 
+}
+
+#bookshelfImg {
+    background-image: url("/assets/images/library.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    min-height: 100vh; 
+    width: 28%; 
+}
+
+.library {
+    display: flex; 
+    background-color: #18282f; 
+}
+
+.bookImg {
+    max-width: 40vh; 
+    min-width: 300px; 
+}
+
+.picture {
+    overflow: hidden;
+}
+
+.Personallibrary{
+    display: flex; 
+    align-items: center;
+    background-image: url("/assets/images/wu-yi-3lJMJ3g37IE-unsplash.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 100vh; 
+}
+
+.personal, .card {
+    background-color: white; 
+    margin: 20px 20px; 
+
+    padding: 10px; 
+}
+
+.topBand {
+    background-color: #0a3d53; 
+}
+
+.searchQuestion{
+    color: white; 
+}
+
+.searchQuestion:hover{
+    color: goldenrod; 
+}
+.choices{
+   margin: 30px 70px; 
+}
+.search {
+    background-color: #0a3d53; 
+    min-height: 150px;
+    position: relative;  
+    padding: 0;
+    margin: 0;
+    height: 10vh;
+    width: 100%;
+}
+form{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all 1s;
+    width: 50px;
+    height: 50px;
+    background: white;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 4px solid white;
+    padding: 5px;
+}
+
+input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;;
+    height: 42.5px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+
+
+
+.fa, .searchBtn{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    color: #07051a;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 1s;
+}
+
+form:hover{
+    width: 200px;
+    cursor: pointer;
+}
+
+form:hover input{
+    display: block;
+}
+
+form:hover .fa{
+    background: #18282f;
+    color: white;
+}
+
+.navbar {
+    margin: 0; 
+}
+
+.books {
+    width: 100%; 
+    padding: 0; 
+}
+ 

@@ -13,13 +13,20 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING,
           allowNull: true
       },
+      keywords: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
       description: {
           type: DataTypes.TEXT,
           allowNull: true
       },
       imageURL: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false,
+        validat: {
+          isUrl: true
+        }
       }
     });
     
@@ -28,7 +35,11 @@ module.exports = function(sequelize, DataTypes) {
           foreignKey: {
             allowNull: false
           }
-        })
+        }); 
+
+        Book.hasMany(models.Comment, {
+          onDelete: "cascade"
+        });
     }; 
     return Book;
   };
