@@ -7,8 +7,7 @@ const path = require("path");
 module.exports = function(app) {
     
     app.post("/api/comments/:id", isAuthenticated, async function(req, res){
-       console.log("info below: "); 
-        console.log(req.body.comment); 
+       try{
         let userId = req.user.id; 
         const authorData = await db.Author.findOne({
             where: {
@@ -23,6 +22,12 @@ module.exports = function(app) {
             BookId: req.params.id,
             CommentorId: commentorId
         }); 
+        res.json(results); 
+        res.status(200); 
+       } catch(err){
+           res.status(404); 
+       }
+        
     }); 
 
 }

@@ -1,8 +1,7 @@
 const path = require("path");
-
 const db = require("../models");
-// const AwsHandling = require("../aws/awsHandling"); 
-// const awsHandling = new AwsHandling(); 
+const AwsHandling = require("../aws/awsHandling"); 
+const awsHandling = new AwsHandling(); 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -49,8 +48,8 @@ module.exports = function(app) {
     res.render("profile", authorData.dataValues); 
   });
 
-  //any user (logged in or not) can access the library
-  app.get("/library", function(req, res){
+  //view all books
+  app.get("/library", isAuthenticated, function(req, res){
     db.Book.findAll({include: db.Author})
     .then(function(dbBook){
         let bookArr= []; 
@@ -73,6 +72,7 @@ module.exports = function(app) {
     }); 
   }); 
 
+  //view books user added
   app.get("/personalLibrary", isAuthenticated, async function(req, res){
     const userId= req.user.id; 
     const authorData = await db.Author.findOne({
@@ -90,6 +90,7 @@ module.exports = function(app) {
     res.render("personalLibrary", {book: bookArr}); 
   });
 
+  //view individual personal books
   app.get("/personalBooks/:id", isAuthenticated, function(req, res){
     const bookId= req.params.id; 
     db.Book.findOne({
@@ -116,7 +117,8 @@ module.exports = function(app) {
     
   }); 
 
-  app.get("/personalEdit/:id", function(req, res){
+  //edit personal books
+  app.get("/personalEdit/:id", isAuthenticated, function(req, res){
     const bookId= req.params.id; 
     db.Book.findOne({
       where: {
@@ -124,35 +126,70 @@ module.exports = function(app) {
       }
     })
     .then(function (dbBook){
-      console.log(dbBook.dataValues); 
       res.render("editBook", dbBook.dataValues); 
     }); 
     
-  })
+  }); 
 
-  // app.get("/book/:id", function(req, res){
-  //   const bookId= req.params.id; 
-  //   db.Book.findOne({
-  //     where: {
-  //       id: bookId
-  //     },
-  //     include: db.Author})
-  //   .then(function(dbBook){
-  //    let bookData = dbBook.dataValues; 
-  //     if (bookData.Author){
-  //       if (bookData.Author.usePseudonym){
-  //         bookData.authorName = bookData.Author.pseudonym; 
-  //       } else{
-  //         bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
-  //       }
-  //     } else {
-  //       bookData.authorName = "Anonymous"; 
-  //     }
-  //       res.render("book",bookData); 
-  //       awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
-  //   });
-  // }); 
+  //view comments on personal book
+  app.get("/comments/:id", isAuthenticated, async function(req, res){
+    const bookId= req.params.id; 
+    const comments = await db.Comment.findAll({
+        where: {
+          BookId: bookId
+        },
+        include: [{
+          model: db.Author,
+          as: "Commentor"
+        },
+        {
+          model: db.Book
+        }]
+      }); 
+      let commentArr= []; 
+      for (const comment of comments){
+        commentArr.push(comment.dataValues); 
+      }
+      for (const commentData of commentArr){ 
+        if (commentData.Commentor){
+          if (commentData.Commentor.usePseudonym){
+           commentData.CommentorName =commentData.Commentor.pseudonym; 
+          } else{
+           commentData.CommentorName=  `${commentData.Commentor.firstName} ${commentData.Commentor.lastName}`;
+          }
+        } else {
+         commentData.CommentorName = "Anonymous"; 
+        }
+      }
+      console.log(commentArr); 
+    res.render("comments", {Comments: commentArr}); 
+  }); 
 
+  //get an individual book from the library
+  app.get("/book/:id", function(req, res){
+    const bookId= req.params.id; 
+    db.Book.findOne({
+      where: {
+        id: bookId
+      },
+      include: db.Author})
+    .then(function(dbBook){
+     let bookData = dbBook.dataValues; 
+      if (bookData.Author){
+        if (bookData.Author.usePseudonym){
+          bookData.authorName = bookData.Author.pseudonym; 
+        } else{
+          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+        }
+      } else {
+        bookData.authorName = "Anonymous"; 
+      }
+        res.render("book",bookData); 
+        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+    });
+  }); 
+
+  //add a book 
   app.get("/addBook",isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
   }); 

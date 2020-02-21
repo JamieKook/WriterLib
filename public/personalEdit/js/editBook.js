@@ -13,7 +13,7 @@ $(document).ready(function() {
       $.ajax({
         type: "PUT",
         enctype: 'multipart/form-data',
-        url: `/api/edit/${bookId}`,
+        url: `/api/books/${bookId}`,
         data: data,
         processData: false,
         contentType: false,
@@ -24,7 +24,7 @@ $(document).ready(function() {
             $("#result").text(data);
             console.log("SUCCESS : ", data);
             $("#btnSubmit").prop("disabled", false);
-            window.location.href = "/home";
+            window.location.href = `/personalBooks/${bookId}`;
 
         },
         error: function (e) {
