@@ -16,17 +16,9 @@
             <br>
             <button type="button" class="btn btn-light p-4 border border-secondary" id="btnDownload"><a href="/tmp/{{id}}/book{{id}}.pdf" download >Download Book</a></button>
             <br><br>
-            <div class="feedback" hidden>
-              <h2>Did you like the Book?</h2>
-              <h4>Let the author know!</h4>
-              <form>
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1">Add your constructive comments about the book here:</label>
-                <textarea form= "commentForm"  class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
-              </div>
-              <input type="submit" data-bookid="{{id}}" class="btn btn-light p-4 border border-secondary"  value="Submit" id="btnSubmit"/>
-            </form>
-          </div>
+            <button type="button" class="btn btn-light p-4 border border-secondary" id="btnEdit"><a href="/personalEdit/{{id}}">Edit Book Information</a></button>
+            <button type="button" class="btn btn-light p-4 border border-secondary" id="btnDelete" data-bookid="{{id}}">Delete this Book</button>
+            <button type="button" class="btn btn-light p-4 border border-secondary" id="btnComments" data-bookid="{{id}}">View Comments</button>
         </div>
           
        </div>
@@ -34,6 +26,5 @@
         
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="/js/downloadBook.js"></script>

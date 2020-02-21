@@ -91,7 +91,7 @@ module.exports = function(app) {
                 let bookFile = req.files.bookFile;
                 console.log(bookFile);  
                 bookFile.mv(`./public/tmp/${bookId}/book${bookId}.pdf`);
-                pdfHandling.createTempBookFolder(bookId); s
+                pdfHandling.createTempBookFolder(bookId); 
                 await awsHandling.upload(bookFile, bookId);
             //     const imgPaths = await pdfHandling.createImages(bookId);
             //     console.log(imgPaths); 
@@ -113,6 +113,70 @@ module.exports = function(app) {
             }
             // res.status(200); 
             // res.json(results); 
+        } catch (err) {
+            console.log(err); 
+        }
+    });
+
+    app.delete("/api/books/:id", isAuthenticated, function(req, res){
+            db.Book.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(book){
+            res.status(200); 
+            res.json(book); 
+        }).catch(function(err){
+            console.log(err); 
+        }); 
+    }); 
+
+
+    app.put("/api/edit/:id", isAuthenticated, async function(req, res) {
+        try {
+         
+            const updates={
+                genre: req.body.genre,
+                type: req.body.type
+            }; 
+
+            console.log(req.body.title.trim()); 
+            if (req.body.title !== ""){
+                updates.title = req.body.title
+            }
+            if (req.body.url !== ""){
+                updates.imageURL = req.body.url
+            }
+            if (req.body.description !== ""){
+                updates.description = req.body.description
+            }
+            if (req.body.keywords !== ""){
+                updates.keywords = req.body.keywords
+            }
+            console.log("------------------------"); 
+            console.log(updates); 
+            const results = await db.Book.update(updates,
+                {where: {
+                    id: req.params.id
+                }
+                }); 
+            if(!req.files) {
+                res.send({
+                    status: false,
+                    message: "No file uploaded",
+                    json: results
+ 
+                }); 
+            } else {
+                let bookFile = req.files.bookFile;
+                console.log(bookFile);  
+                bookFile.mv(`./public/tmp/${bookId}/book${bookId}.pdf`);
+                pdfHandling.createTempBookFolder(bookId); 
+                await awsHandling.upload(bookFile, bookId); 
+                res.status(200); 
+                res.json(results); 
+            }
+    
         } catch (err) {
             console.log(err); 
         }
@@ -141,5 +205,54 @@ module.exports = function(app) {
        }).catch(function(err){
            res.status(404); 
        }); 
-   }); 
+   });
+   
+   app.get("/book/:id", function(req, res){
+    const bookId= req.params.id; 
+    db.Book.findOne({
+      where: {
+        id: bookId
+      },
+      include: db.Author})
+    .then(function(dbBook){
+     let bookData = dbBook.dataValues; 
+      if (bookData.Author){
+        if (bookData.Author.usePseudonym){
+          bookData.authorName = bookData.Author.pseudonym; 
+        } else{
+          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+        }
+      } else {
+        bookData.authorName = "Anonymous"; 
+      }
+        res.render("book",bookData); 
+        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+    });
+  }); 
+
+    app.get("/personalBooks/:id", isAuthenticated, function(req, res){
+    const bookId= req.params.id; 
+    db.Book.findOne({
+      where: {
+        id: bookId
+      },
+      include: [db.Author, db.Comment]
+    })
+    .then(function(dbBook){
+     let bookData = dbBook.dataValues; 
+     console.log(bookData); 
+      if (bookData.Author){
+        if (bookData.Author.usePseudonym){
+          bookData.authorName = bookData.Author.pseudonym; 
+        } else{
+          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+        }
+      } else {
+        bookData.authorName = "Anonymous"; 
+      }
+        res.render("personalBook",bookData); 
+        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+    });
+    
+  }); 
 }; 

@@ -1,8 +1,8 @@
 const path = require("path");
 
 const db = require("../models");
-const AwsHandling = require("../aws/awsHandling"); 
-const awsHandling = new AwsHandling(); 
+// const AwsHandling = require("../aws/awsHandling"); 
+// const awsHandling = new AwsHandling(); 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
@@ -73,7 +73,7 @@ module.exports = function(app) {
     }); 
   }); 
 
-  app.get("/personalBooks", isAuthenticated, async function(req, res){
+  app.get("/personalLibrary", isAuthenticated, async function(req, res){
     const userId= req.user.id; 
     const authorData = await db.Author.findOne({
       include: db.Book, 
@@ -110,34 +110,48 @@ module.exports = function(app) {
       } else {
         bookData.authorName = "Anonymous"; 
       }
-        res.render("book",bookData); 
+        res.render("personalBook",bookData); 
         awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
     });
     
   }); 
 
-  app.get("/book/:id", function(req, res){
+  app.get("/personalEdit/:id", function(req, res){
     const bookId= req.params.id; 
     db.Book.findOne({
       where: {
         id: bookId
-      },
-      include: db.Author})
-    .then(function(dbBook){
-     let bookData = dbBook.dataValues; 
-      if (bookData.Author){
-        if (bookData.Author.usePseudonym){
-          bookData.authorName = bookData.Author.pseudonym; 
-        } else{
-          bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
-        }
-      } else {
-        bookData.authorName = "Anonymous"; 
       }
-        res.render("book",bookData); 
-        awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
-    });
-  }); 
+    })
+    .then(function (dbBook){
+      console.log(dbBook.dataValues); 
+      res.render("editBook", dbBook.dataValues); 
+    }); 
+    
+  })
+
+  // app.get("/book/:id", function(req, res){
+  //   const bookId= req.params.id; 
+  //   db.Book.findOne({
+  //     where: {
+  //       id: bookId
+  //     },
+  //     include: db.Author})
+  //   .then(function(dbBook){
+  //    let bookData = dbBook.dataValues; 
+  //     if (bookData.Author){
+  //       if (bookData.Author.usePseudonym){
+  //         bookData.authorName = bookData.Author.pseudonym; 
+  //       } else{
+  //         bookData.authorName=  `${bookData.Author.firstName} ${bookData.Author.lastName}`;
+  //       }
+  //     } else {
+  //       bookData.authorName = "Anonymous"; 
+  //     }
+  //       res.render("book",bookData); 
+  //       awsHandling.retrieveFile(`book${bookId}.pdf`, bookId);
+  //   });
+  // }); 
 
   app.get("/addBook",isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname, "../public/newBookForm.html")); 
