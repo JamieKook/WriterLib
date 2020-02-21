@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     // If the user already has an account send them to the home page
+    console.log(req.user); 
     if (req.user) {
       res.redirect("/home");
     }
@@ -16,6 +17,7 @@ module.exports = function(app) {
 
   app.get("/signup", function(req, res) {
     // If the user already has an account send them to the home page
+    console.log(req.user);
     if (req.user) {
       res.redirect("/home");
     }
@@ -24,6 +26,7 @@ module.exports = function(app) {
 
   app.get("/login", function(req, res) {
     // If the user already has an account send them to the home page
+    console.log(req.user);
     if (req.user) {
       res.redirect("/home");
     }
@@ -41,10 +44,6 @@ module.exports = function(app) {
             UserId: userId
         }
     });
-    console.log(authorData); 
-    for (let i=0; i<3; i++){
-      console.log(authorData.dataValues.Books[i]); 
-    }
     res.render("profile", authorData.dataValues); 
   });
 
