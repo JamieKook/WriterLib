@@ -6,66 +6,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
   <link href="\stylesheets\style3.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
+  
+  <div class="wrapper fadeInDown">
+   <div id="formContent">
+      
+      <h2 class="active"> Sign Up </h2>
+    
+    
+    <form>
+      <div class="form__item">
+        <label for="firstName"class="form__label">First Name</label>
+        <input type="text" class="fadeIn first" id="firstName" placeholder="Jane">
       </div>
+    
+    <div class="form__item">
+      <label for="lastName"class="form__label">Last Name</label>
+      <input type="text" class="fadeIn second" id="lastName" placeholder="Doe">
     </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Sign Up Form</h2>
-        
-        <form class="signup">
-          <div class="form__title">
-              <label for="firstName"class="form__label">First Name</label>
-              <input type="text" class="form__input" id="firstName" placeholder="Jane">
-              <span class="form__error">A sample error message</span>
-            </div>
-            
-            <div class="form__item">
-              <label for="lastName"class="form__label">Last Name</label>
-              <input type="text" class="form__input" id="lastName" placeholder="Doe">
-              <span class="form__error">A sample error message</span>
-            </div>
-          
-            <div class="form__item">
-            <label for="exampleInputEmail1"class="form__label">Email address</label>
-            <input type="email" class="form__input" id="email-input" placeholder="Email">
-          </div>
-          
-          <div class="form__item">
-            <label for="exampleInputPassword1" class="form__label">Password</label>
-            <input type="password" class="form__input" id="password-input" placeholder="Password">
-          </div>
-
-          <div class="form__item">
-            <input type="checkbox" class="form__label" id="isPseudonym">
-            <label class="form__input" for="isPseudonym">Do you want to use a pseudonymn?</label>
-          </div>
-          
-          <div class="form__item">
-            <label for="pseudonym"class="form__label">Pseudonym</label>
-            <input type="text" class="form__input" id="pseudonym" placeholder="Quiet S. Torm">
-          </div>
-
-          <div class="form__item">
-            <button class="form__btn" type="submit">Sign Up</button>
-          </div>
-        </form>
-        <br />
-        <p>Or log in <a href="/login">here</a></p>
-      </div>
+  
+    <div class="form__item">
+      <label for="exampleInputEmail1"class="form__label">Email address</label>
+      <input type="text" class="fadeIn third" id="email-input" placeholder="Email">
     </div>
+  
+    <div class="form__item">
+      <label for="exampleInputPassword1" class="form__label">Password</label>
+      <input type="text" class="fadeIn fourth" id="password-input" placeholder="Password">
+    </div>
+
+    <div class="form__item">
+      <input type="checkbox" class="form__label" id="isPseudonym">
+     <label class="form__input" for="isPseudonym">Do you want to use a pseudonymn?</label>
+    </div>
+  
+    <div class="form__item">
+      <label for="pseudonym"class="form__label">Pseudonym</label>
+      <input type="text" class="form__input" id="pseudonym" placeholder="Quiet S. Torm">
+    </div>
+
+    <div class="form__item">
+      <button class="form__btn" type="submit">Sign Up</button>
+    </div>
+  </form>
+  <br />
+    <p>Or log in <a href="/login">here</a></p>
+
   </div>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/signup.js"></script>
+  <script type="text/javascript" src="js/login.js"></script>
   <script type="text/css" src="stylesheets/style3.css"></script>
 
 </body>
