@@ -8,8 +8,9 @@ $(document).ready(function() {
   let isPseudonym = $("#isPseudonym"); 
   let pseudonymEl = $("#pseudonym"); 
 
+  console.log("connected to signup.js"); 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("submit", function(event) {
+  $("#submitBtn").on("click", function(event) {
     event.preventDefault();
     console.log("testing"); 
     const userData = {
