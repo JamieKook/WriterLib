@@ -45,6 +45,7 @@ require("./routes/html-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
 require("./routes/author-api-routes.js")(app);
 require("./routes/book-api-routes.js")(app);
+require("./routes/comments-api-routes.js")(app);
 // require("./routes/upload-api-routes")(app); 
 
 const dir = `./public/tmp/`;

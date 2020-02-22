@@ -1,0 +1,30 @@
+<div class="text-center">
+  <div class="title">
+    <h1>{{title}}</h1>
+    <h2>By {{authorName}}</h2>
+  </div>
+  
+    <div class = "row book">
+       <div class ="col-md-6 picture">
+          <img class="bookImg" src="{{imageURL}}">
+       </div>
+       <div class = "col-md-6 text-left">
+         <div class="about">
+            <h2>Book Description: </h2>
+            <br>
+            <h4>{{description}}</h4>
+            <br>
+            <button type="button" class="btn btn-light p-4 border border-secondary" id="btnDownload"><a href="/tmp/{{id}}/book{{id}}.pdf" download >Download Book</a></button>
+            <br><br>
+            <button type="button" class="personalbtn btn btn-light p-4 border border-secondary" id="btnEdit"><a href="/personalEdit/{{id}}">Edit Book Information</a></button> 
+            <button type="button" class="personalbtn btn btn-light p-4 border border-secondary" id="btnDelete" data-bookid="{{id}}"><a>Delete this Book</a></button>
+            <button type="button" class="personalbtn btn btn-light p-4 border border-secondary" id="btnComments" data-bookid="{{id}}"><a href="/comments/{{id}}">View Comments</a></button>
+        </div>
+          
+       </div>
+       
+        
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/js/downloadBook.js"></script>

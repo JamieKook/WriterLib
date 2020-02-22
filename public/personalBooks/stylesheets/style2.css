@@ -1,0 +1,59 @@
+.title {
+    margin: 30px; 
+}
+
+body {
+
+    background-image: url("https://wallpapercave.com/wp/hpehPUv.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+
+}
+
+.bookImg {
+    max-width: 40vh; 
+    min-width: 500px; 
+}
+
+.picture {
+    overflow: hidden;
+}
+
+a {
+    color: #54422e; 
+    font-size: 2rem; 
+}
+
+a:hover {
+    color: #a3a294; 
+}
+
+a:active {
+    color: #a3a294; 
+}
+
+a:visited {
+    color: #a3a294; 
+}
+
+a:focus {
+    color: #a3a294; 
+}
+
+.about {
+    margin-left: 0px; 
+    margin-bottom: 50px; 
+    margin-right: 50px; 
+}
+
+h1, h2, h3, h4, label {
+    color: white; 
+}
+
+.commentForm{
+    margin-right: 30px; 
+}
+
+.personalbtn{
+    margin-top: 30px; 
+}

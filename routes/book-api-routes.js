@@ -8,15 +8,16 @@ const pdfHandling = new PdfHandling();
 
 module.exports = function(app) {
 
+    //return all book data
     app.get("/api/books", function(req, res){
         db.Book.findAll({include: db.Author})
             .then(function(dbBook){
                 console.log(dbBook); 
                 res.json(dbBook); 
-                // res.render("library",{book: dbBook}); 
             }); 
     }); 
 
+    //return individual book data
     app.get("/api/books/:id", function(req,res){
         console.log(req.params.id); 
         db.Book.findOne({
@@ -30,6 +31,7 @@ module.exports = function(app) {
         });
     }); 
 
+    //download a file from aws
     app.get("/api/books/fileDownload/:id", async function(req, res){
         try {
             const bookId= req.params.id; 
@@ -57,6 +59,7 @@ module.exports = function(app) {
         }
     }); 
 
+    //upload a file to aws and create database for book
     app.post("/api/books/fileUpload", isAuthenticated, async function(req, res) {
         try {
             console.log(req.body); 
@@ -91,7 +94,7 @@ module.exports = function(app) {
                 let bookFile = req.files.bookFile;
                 console.log(bookFile);  
                 bookFile.mv(`./public/tmp/${bookId}/book${bookId}.pdf`);
-                pdfHandling.createTempBookFolder(bookId); s
+                pdfHandling.createTempBookFolder(bookId); 
                 await awsHandling.upload(bookFile, bookId);
             //     const imgPaths = await pdfHandling.createImages(bookId);
             //     console.log(imgPaths); 
@@ -118,28 +121,104 @@ module.exports = function(app) {
         }
     });
 
-    app.delete("/api/books/:id", isAuthenticated, function(){
-        db.Book.destroy({
-            where: {
-                id: req.params.id
+    //edit specific book
+    app.put("/api/books/:id", isAuthenticated, async function(req, res) {
+        try {
+         
+            const updates={
+                genre: req.body.genre,
+                type: req.body.type
+            }; 
+
+            console.log(req.body.title.trim()); 
+            if (req.body.title !== ""){
+                updates.title = req.body.title
             }
+            if (req.body.url !== ""){
+                updates.imageURL = req.body.url
+            }
+            if (req.body.description !== ""){
+                updates.description = req.body.description
+            }
+            if (req.body.keywords !== ""){
+                updates.keywords = req.body.keywords
+            }
+            console.log("------------------------"); 
+            console.log(updates); 
+            const results = await db.Book.update(updates,
+                {where: {
+                    id: req.params.id
+                }
+                }); 
+            if(!req.files) {
+                res.send({
+                    status: false,
+                    message: "No file uploaded",
+                    json: results
+ 
+                }); 
+            } else {
+                let bookFile = req.files.bookFile;
+                console.log(bookFile);  
+                bookFile.mv(`./public/tmp/${bookId}/book${bookId}.pdf`);
+                pdfHandling.createTempBookFolder(bookId); 
+                await awsHandling.upload(bookFile, bookId); 
+                res.status(200); 
+                res.json(results); 
+            }
+    
+        } catch (err) {
+            console.log(err); 
+        }
+    });
+
+
+    //delete specific book
+    app.delete("/api/books/:id", isAuthenticated, function(req, res){
+        db.Book.destroy({
+        where: {
+            id: req.params.id
+        }
         }).then(function(book){
+            res.status(200); 
             res.json(book); 
         }).catch(function(err){
             res.status(404); 
         }); 
     }); 
 
-   app.put("/api/book/:id", isAuthenticated, function(){
-       db.Book.update(req.body,
-        {
+app.get("/api/:filter/:choice", function(req, res){
+    if (req.params.filter === "genre"){
+        db.Book.findAll({
+        include: db.Author,
+        where: {
+            genre: req.params.choice
+        }
+        }).then(function(dbBook){
+            dataArrange(dbBook, res); 
+        }); 
+    } else if (req.params.filter === "type"){
+        db.Book.findAll({
+            include: db.Author,
             where: {
-                id: req.params.id
+                type: req.params.choice
             }
-       }).then(function(book){
-           res.json(book); 
-       }).catch(function(err){
-           res.status(404); 
-       }); 
-   }); 
+            }).then(function(dbBook){
+                dataArrange(dbBook, res); 
+            }); 
+    } else if (req.params.filter === "both"){
+        let genre= req.params.choice.split("-")[0]; 
+        let type = req.params.choice.split("-")[1]; 
+        db.Book.findAll({
+            include: db.Author,
+            where: {
+                genre: genre,
+                type: type
+            }
+            }).then(function(dbBook){
+                dataArrange(dbBook, res); 
+            }); 
+    }
+});
+    
 }; 

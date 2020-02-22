@@ -367,8 +367,7 @@ h1
 {
   width: 200px;
 }
-.search-btn
-{
+.search-btn{
   height: 50px;
   width: 150px;
   background: #FFEB3B;
@@ -387,21 +386,11 @@ h1
   border-radius: 25px;
 
 }
-#searchmaps-btn:hover{
-  background: #FFC107;
-  cursor: pointer;
-}
-#searchmaps{
-  border-radius: 25px;
-}
 .container-fluid{
   /* background-color: #2D3E50; */
   color: #FFC107;
 }
-#map {
-  height: 400px;  /* The height is 400 pixels */
-  width: 100%;  /* The width is the width of the web page */
- }
+
 #goldentext{
   color: #FFC107;
 }
@@ -414,19 +403,6 @@ font-family: Roboto;
 font-size: 15px;
 font-weight: 300;
 }
-
-#infowindow-content .title {
-font-weight: bold;
-}
-
-#infowindow-content {
-display: none;
-}
-
-#map #infowindow-content {
-display: inline;
-}
-
 .pac-card {
 margin: 10px 10px 0 0;
 border-radius: 2px 0 0 2px;
@@ -482,4 +458,14 @@ width: 345px;
 img.pure-img-responsive{
   width: 80%;
   height: auto;
+}
+#get-Button{
+  height: 50px;
+  width: 150px;
+  background: #FFEB3B;
+  border: none;
+  color: #000;
+  border-radius: 25px;
+  cursor: pointer;
+  justify-content: center;
 }

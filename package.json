@@ -23,10 +23,9 @@
     "morgan": "^1.9.1",
     "mysql": "^2.18.1",
     "mysql2": "^1.6.5",
+    "nodemon": "^2.0.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pdf-image": "^2.0.0",
-    "pdf2pic": "^1.3.11",
     "sequelize": "^5.21.4"
   }
 }
