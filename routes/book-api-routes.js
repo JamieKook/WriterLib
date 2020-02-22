@@ -60,7 +60,7 @@ module.exports = function(app) {
             // res.download(file);
             // var file = fs.createReadStream(filePath);
             // file.pipe(res)
-            await pdfHandling.otherCreate(bookId); 
+            // await pdfHandling.otherCreate(bookId); 
         //     const imgPaths = await pdfHandling.createImages(bookId);  
         //     const imgPathsArr = Object.values(imgPaths); 
         //      console.log(imgPathsArr); 
