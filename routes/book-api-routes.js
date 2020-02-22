@@ -144,6 +144,7 @@ module.exports = function(app) {
     //edit specific book
     app.put("/api/books/:id", isAuthenticated, async function(req, res) {
         try {
+            const bookId = req.params.id; 
          
             const updates={
                 genre: req.body.genre,
