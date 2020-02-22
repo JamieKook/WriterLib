@@ -1,17 +1,43 @@
 body{
-	background-image: url(https://miro.medium.com/max/5120/1*42ebJizcUtZBNIZPmmMZ5Q.jpeg);
-	background-repeat: no-repeat;
-	background-position:center;
+  background-color: powderblue;
+  background-position:center;
+  justify-content: center;
 }
 
-/* form.signup, */
-form.login {
-  margin-top: 50px;
+.typewriter h1 {
+  color: black;
+  font-family: "Arvo";
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid black; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
 }
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: black }
+}
+
+
+/* form.signup, */
+/* form.login {
+  margin-top: 50px;
+} */
 
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i&display=swap");
 
-.form {
+/* .form {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
 }
@@ -44,10 +70,10 @@ form.login {
   -webkit-appearance: none;
 
   width: 100%;
-  max-width: 425px;
+  max-width: 425px; */
 
   /* Fix for Safari/iOS date fields */
-  min-height: calc(0.9em + (0.8em * 2) + 0.6em);
+  /* min-height: calc(0.9em + (0.8em * 2) + 0.6em);
 
   padding: 0.8em;
   font-size: 0.9em;
@@ -97,13 +123,6 @@ textarea.form__input {
   resize: none;
   min-height: 200px;
 }
-
-.form__btn {
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 600;
-  font-size: 1.1em;
-  padding: 10px 16px;
-  margin: 10px 0;
 
   color: #ffffff;
   background: #14b64a;
@@ -201,15 +220,16 @@ a.pure-button-primary {
   background: none;
   border: none;
   color: #AECFE5;
-}
-.splash-container {
-  /* z-index: 1; */
-  overflow: hidden;
+} */
+
+.splash-container { 
+  z-index: 0;
+  overflow: initial;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  position: fixed !important;
+
 }
 .splash {
   width: 100%;
@@ -221,14 +241,8 @@ a.pure-button-primary {
   text-transform: uppercase;
 }
 .splash-head {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  border: 3px solid white;
-  padding: 1em 1.6em;
-  font-weight: 100;
-  border-radius: 5px;
-  line-height: 1em;
+  margin: 30px center;
+  
 }
 .splash-subhead {
   color: rgb(231, 191, 13);
@@ -237,8 +251,8 @@ a.pure-button-primary {
   font-family: 'Dancing Script';
   font-size: x-large;
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
+  margin: 90px; 
 }
 .content-wrapper {
   position: absolute;
@@ -260,17 +274,18 @@ a.pure-button-primary {
   padding-left: 30px;
 }
 .content-head-ribbon {
-  color: white;
+  color:black;
 }
 .content-subhead {
-  color: #1F8DD6;
+  color: black;
 }
   .content-subhead i {
-      margin-right: 7px;
+      margin: 0;
   }
 .ribbon {
-  background: #2D3E50;
-  color: #aaa;
+  margin-bottom: fixed;
+   background-color: gray;
+   opacity:0.5;
 }
 .footer {
 
@@ -298,9 +313,7 @@ height:150px;
   .splash-head {
       font-size: 250%;
   }
-  .l-box-lrg {
-      border: none;
-  }
+  
 
 
 }
@@ -311,9 +324,7 @@ height:150px;
   .l-box-lrg {
       border: none;
   }
-  body {
-      font-size: 16px;
-  }
+  
   .home-menu {
       text-align: left;
   }
@@ -340,31 +351,13 @@ height:150px;
   align-items: center;
   font-family: sans-serif;
 }
-h1
-/* {
-  color: #fff;
-  margin-bottom: 70px;
-  font-size: 45px;
-  letter-spacing: 2px;
-  text-align: center;
-} */
-.search-field
-{
-  height: 50px;
-  padding: 10px;
-  border: none;
-  border-radius: 25px;
-  outline: none;
-}
+
 .business
 {
   width: 400px;
 }
-.location
-{
-  width: 200px;
-}
-.search-btn
+
+.pure-button
 {
   height: 50px;
   width: 150px;
@@ -373,27 +366,16 @@ h1
   color: #000;
   border-radius: 25px;
 }
-.search-btn:hover{
+.pure-button:hover{
   background: #FFC107;
   cursor: pointer;
 }
-.form-box
-{
-  background: rgba(0,0,0,0.5);
-  padding: 30px;
-  border-radius: 25px;
 
-}
-#searchmaps-btn:hover{
-  background: #FFC107;
-  cursor: pointer;
-}
-#searchmaps{
-  border-radius: 25px;
-}
+
 .container-fluid{
   /* background-color: #2D3E50; */
   color: #FFC107;
+ ma;
 }
 #map {
   height: 400px;  /* The height is 400 pixels */
@@ -426,7 +408,7 @@ display: inline;
 
 .pac-card {
 margin: 10px 10px 0 0;
-border-radius: 2px 0 0 2px;
+border-radius: 5px 0 0 5px;
 box-sizing: border-box;
 -moz-box-sizing: border-box;
 outline: none;

@@ -1,8 +1,10 @@
 body{
 	background-image: url(https://miro.medium.com/max/5120/1*42ebJizcUtZBNIZPmmMZ5Q.jpeg);
 	background-repeat: no-repeat;
-	background-position:center;
+  background-position:center;
+  position: fixed;
 }
+
 
 /* form.signup, */
 form.login {

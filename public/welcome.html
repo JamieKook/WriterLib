@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="A layout example that shows off a responsive product landing page.">   <title>WritersLibrary</title>    
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
-            <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-        <script
+        <script>
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
@@ -18,94 +18,41 @@
 
 <body>
 <div class="header">
-    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">WritersLibrary</a>
-        <ul class="pure-menu-list pTop">
-            <li class="pure-menu-item pure-menu-selected heada" ><a href="#" class="pure-menu-link"></a></li>
-        </ul>
-    </div>
-</div>
 <div class="splash-container" style="background-image: url(assets/openBook.jpeg); height: 100%;" ></div>
-    <div class="splash "> 
-        <h1 class="splash-head">Let your stories be heard!</h1>
+<div class="splash"> 
+    <div class="typewriter">
+        <h1 class="splash-head"> Writers Library</h1>
+    </div>
         <p class="splash-subhead">
             Made for writers who want to share their imagination and their stories to fellow writers as well as publishers!
         </p>
         <p>
-            <a href="/signup" class="pure-button pure-button-primary" id="get-Button">Get Started!</a>
+            <a href="/login.html" class="pure-button pure-button-primary" id="get-Button">Get Started!</a>
         </p>
        
     </div>
-<div id="events-section">
-<div class="content-wrapper pure">
-    <div class="cards">
-        <h2 id="search" class="content-head is-center pure-menu"></h2> 
-            <div id="goldentext" class="header2">
-                <form>
-                <h1>FInd and share your story</h1>
-                <div class="container">
-                    <div class="row">
-                      <div class="col-md-6 col-md-offset-3">
-                        <h2>Login Form</h2>
-                        <form class="login">
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="email-input" placeholder="Email">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="password-input" placeholder="Password">
-                          </div>
-                          <button type="submit" class="btn btn-default">Login</button>
-                        </form>
-                        <br />
-                        <p>Or sign up <a href="/signup">here</a></p>
-                      </div>
-                    </div>
-                  </div>
-                <!-- <div class="form-box"> -->
-                    <!-- <input type="text" class="search-field business .pure-u-sm-" id="searchbar"
-                    placeholder="Books, Articles.." style="color: black;">
-                    <input type="text" class="search-field location .pure-u-sm-" id="citybar"
-                    placeholder="City" style="color: black;">
-                    <button class="search-btn .pure-u-sm-" id="search-Field" type="button">Search</button>
-                </div> -->
-            </form>
+
+    </form>
             <div class="card-Section is-center events-view" id="events-view">
-        </div>
-        <div class="pure-g">
-        </div>
-    </div>
-</div>
-    <div class="ribbon l-box-lrg pure-g">
+                </div>
+                <div class="pure-g">
+            </div>
+                </div>
+            </div>
+            <div class="ribbon l-box-lrg pure-g footer">
         <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="assets/openBook.jpeg" style="height: 175px; width: 250px;">
         </div>
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
             <h2 class="content-head content-head-ribbon">Wanna know more?</h2>
             <p>
-                want input on your latest short story? Maybe you want a piece of writing to be noticed by a publisher?
+                Want input on your latest short story?<br>
+                Maybe you want a piece of writing to be noticed by a publisher?
                 Here at WritersLibrary, you can have all of these benefits and more by becoming a member!
             </p>
         </div>
     </div>
-    <h1 class="display-4 " style="color:#FFC107;"></h1>
-    <div class="row">
-            <div class="col">
-                <div class="form-box">
-                      <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="color: black;">
-                  <div id="map"></div>
-          <div class="container-fluid">
-                <div class="row">
-                  <div class="col">
-                    <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-
-                        </div>
-                     
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
+    
+                <!-- <div class="row">
                   </div>
                 </div>
 
@@ -116,7 +63,7 @@
 
     
         </div>
-    </div> 
+    </div>  -->
    
         <script type="text/javascript">
             (function(d, sc, u) {
@@ -128,7 +75,7 @@
               })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
               
         </script>
-        <script src="public/js/login.js"></script>
+        <script src="public/js/signup.js"></script>
         
 </body>
 </html>
